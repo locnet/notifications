@@ -6,7 +6,8 @@
                     <div class="panel-heading">Example Component</div>
 
                     <div class="panel-body">
-                        I'm an example component!
+                        <p>{{ element }}</p>
+                        <p><a v-bind:href="link">Google</a></p>
                     </div>
                 </div>
             </div>
@@ -18,6 +19,12 @@
     export default {
         mounted() {
             console.log('Component mounted.')
+        },
+        data() {
+            return {
+                element: "hola",
+                link: "https://google.es"
+            }
         }
     }
 </script>
