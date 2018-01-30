@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <example-component></example-component
+    <main-component itinerary= "{{ $itinerary }}"
+                    changes = "{{ $changes }}"
+                    pnrs = "{{ $pnrs }}">
+    </main-component>
 @endsection

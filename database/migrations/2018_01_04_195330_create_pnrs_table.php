@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarriersTable extends Migration
+class CreatePnrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateCarriersTable extends Migration
      */
     public function up()
     {
-        Schema::create('carriers', function (Blueprint $table) {
+        Schema::create('pnrs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('iata_code');
+            $table->string('pnr');
+            $table->integer('change_id')->unsignedInteger();
+            $table->string('passenger', 60);
+            $table->string('phone', 30);
+            $table->boolean('status');
+            $table->mediumText('comments');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateCarriersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carriers');
+        Schema::dropIfExists('pnrs');
     }
 }
