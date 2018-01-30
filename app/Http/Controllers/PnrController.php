@@ -46,7 +46,14 @@ class PnrController extends Controller
             'phone' => $request->phone,
             'comments' => $request->comments
         ];
+        // no insertar sin comentarios
+        $dt = Carbon::now(); // fecha actual
 
+        if (strlen($request->comments) == 0) {
+            $newComment = array($dt, 'Sin detalles.');
+            $data['comments'] = implode(';',$newComment);
+        }
+        
         if ($p = $this->pnr::firstOrCreate($data)) {
             return redirect('home');
         } else {
@@ -75,6 +82,7 @@ class PnrController extends Controller
 
         // comentarios antiguos
         if ( strlen($request->comment) > 0) {
+
             if (strlen($p->comments) > 0) {
                 $new_comments = $p->comments.'&'. $imploded;
             } else {
@@ -83,6 +91,7 @@ class PnrController extends Controller
 
             $p->comments = $new_comments;
             $response = $p->save();
+
             return "true";
         }
         return "false";   

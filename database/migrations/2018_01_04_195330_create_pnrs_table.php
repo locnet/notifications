@@ -19,7 +19,7 @@ class CreatePnrsTable extends Migration
             $table->integer('change_id')->unsignedInteger();
             $table->string('passenger', 60);
             $table->string('phone', 30);
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->mediumText('comments');
             $table->timestamps();
         });

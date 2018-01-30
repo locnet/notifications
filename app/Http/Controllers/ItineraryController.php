@@ -124,7 +124,7 @@ class ItineraryController extends Controller
             // db
             $data['return_dep_time'] = $request->return_dep_date.' '.$request->return_dep_hour;
             $data['return_arr_time'] = $request->return_arr_date.' '.$request->return_arr_hour;
-        } else { return "no hay datos";
+        } else {
             $data['return_dep_time'] = '1900-01-01 00:00:00';
             $data['return_arr_time'] = '1900-01-01 00:00:00';
         }
