@@ -49973,7 +49973,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 col-xs-12" }, [
+        _c("div", { staticClass: "col-md-3 col-xs-6" }, [
           _c(
             "button",
             {
@@ -49990,7 +49990,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 col-xs-12" }, [
+        _c("div", { staticClass: "col-md-6 col-xs-6" }, [
           _c("p", [_vm._v("Status : " + _vm._s(_vm.status))])
         ])
       ]),

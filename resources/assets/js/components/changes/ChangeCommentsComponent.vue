@@ -10,10 +10,10 @@
                                 style="width:100%"></textarea>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-xs-6">
                     <button @click.stop.prevent="saveComments" class="btn btn-primary">Guarda</button>
             </div>
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-6">
                 <p>Status : {{ status }}</p>
             </div>
         </form>
