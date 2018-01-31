@@ -49887,9 +49887,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response);
                 _this.status = " El comentario ha sido guardado!";
                 // añado el nuevo comentario a los antiguos
-                _this.oldComments.item.push(_this.comments);
-                // despues de guardar el comentario reseteo el textarea
-                _this.comments = '';
+                if (_this.comments.length() > 0) {
+                    _this.oldComments.item.push(_this.comments);
+                    // despues de guardar el comentario reseteo el textarea
+                    _this.comments = '';
+                }
             }).catch(function (error) {
                 console.log(error.response);
             });

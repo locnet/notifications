@@ -49,9 +49,11 @@
                         console.log(response);
                         this.status = " El comentario ha sido guardado!";      
                         // añado el nuevo comentario a los antiguos
-                        this.oldComments.item.push(this.comments);
-                        // despues de guardar el comentario reseteo el textarea
-                        this.comments = '';                      
+                        if (this.comments.length() > 0) {
+                            this.oldComments.item.push(this.comments);
+                            // despues de guardar el comentario reseteo el textarea
+                            this.comments = '';
+                        }              
                         
                     }).catch(error => {
                             console.log(error.response)

@@ -2,7 +2,7 @@
 
 @section('content')   
     
-    <div class="col-md-10 col-xs-12 tabel-responsive">
+    <div class="col-md-10 col-xs-12 table-responsive">
          <table class="table table-bordered table-striped animated fadeIn">
             <thead class="thead-dark">
                 <tr class="text-center">
