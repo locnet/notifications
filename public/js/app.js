@@ -49884,13 +49884,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 comment: this.comments // nuevo comentario
 
             }).then(function (response) {
-                console.log(response);
-                _this.status = " El comentario ha sido guardado!";
+                console.log("raspuns:" + response.data);
+
                 // añado el nuevo comentario a los antiguos
-                if (_this.comments.length() > 0) {
+                console.log("lungime: " + _this.comments.length);
+                if (_this.comments.length > 0) {
                     _this.oldComments.item.push(_this.comments);
+                    _this.status = " El comentario ha sido guardado!";
                     // despues de guardar el comentario reseteo el textarea
                     _this.comments = '';
+                } else {
+                    _this.status = "Nada por guardar!";
                 }
             }).catch(function (error) {
                 console.log(error.response);
@@ -49922,7 +49926,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         // al crear el componente hay que formatear los comentarios antiguos
         this.oldComments = this.parseComments(this.old_comments);
-        console.log("url: " + this.close_notification_url);
     }
 });
 

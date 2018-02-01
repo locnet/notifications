@@ -46,17 +46,22 @@
                         comment: this.comments          // nuevo comentario
 
                     }).then( response => {
-                        console.log(response);
-                        this.status = " El comentario ha sido guardado!";      
-                        // añado el nuevo comentario a los antiguos
-                        if (this.comments.length() > 0) {
+                        // la respuesta del ItineraryController@update puede ser "true" o "false"
+                        console.log("raspuns:" + response.data);                              
+                        
+                        if (this.comments.length > 0) {
+                            // añado el nuevo comentario a los antiguos
                             this.oldComments.item.push(this.comments);
+                            this.status = " El comentario ha sido guardado!";
                             // despues de guardar el comentario reseteo el textarea
                             this.comments = '';
-                        }              
+                        }  else {
+                            // se ha pulsado el boton "Guardar" sin ningun comentario
+                            this.status = "Nada por guardar!";
+                        }            
                         
                     }).catch(error => {
-                            console.log(error.response)
+                            console.log(error.response);
                         }
                     );
             },
@@ -85,9 +90,9 @@
             }
         },
         created() {
-            // al crear el componente hay que formatear los comentarios antiguos
+            // al crear el componente rescatamos los comentarios antiguos din db y 
+            // los formateamos
             this.oldComments = this.parseComments(this.old_comments);
-            console.log("url: " + this.close_notification_url);
         }
     }
 </script>
