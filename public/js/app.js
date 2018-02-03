@@ -49860,8 +49860,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['pnr', 'old_comments', 'close_notification_url'],
@@ -49884,16 +49882,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 comment: this.comments // nuevo comentario
 
             }).then(function (response) {
+                // la respuesta del ItineraryController@update puede ser "true" o "false"
                 console.log("raspuns:" + response.data);
 
-                // añado el nuevo comentario a los antiguos
-                console.log("lungime: " + _this.comments.length);
                 if (_this.comments.length > 0) {
+                    // añado el nuevo comentario a los antiguos
                     _this.oldComments.item.push(_this.comments);
                     _this.status = " El comentario ha sido guardado!";
                     // despues de guardar el comentario reseteo el textarea
                     _this.comments = '';
                 } else {
+                    // se ha pulsado el boton "Guardar" sin ningun comentario
                     _this.status = "Nada por guardar!";
                 }
             }).catch(function (error) {
@@ -49924,7 +49923,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        // al crear el componente hay que formatear los comentarios antiguos
+        // al crear el componente rescatamos los comentarios antiguos din db y 
+        // los formateamos
         this.oldComments = this.parseComments(this.old_comments);
     }
 });
@@ -49944,8 +49944,11 @@ var render = function() {
       _vm._l(_vm.oldComments, function(value, key) {
         return _c(
           "ul",
+          { staticClass: "list-group" },
           _vm._l(value, function(v) {
-            return _c("li", [_vm._v(_vm._s(v))])
+            return _c("li", { staticClass: "list-group-item" }, [
+              _vm._v(_vm._s(v))
+            ])
           })
         )
       }),
