@@ -11,6 +11,7 @@
                                         closed: isActive(pnrData.status) }">
                         {{ pnrData.status == 0 ? 'Cerrado' : 'Pendiente' }}
                     </td>
+                    <td v-on:click="goToCopyPage" style="cursor:pointer"><i class="fa fa-copy"></i>Copiar</td>
                 </tr>
             </tbody>
         </table>
@@ -19,7 +20,7 @@
 
 <script>
 export default {
-    props:['pnr'],
+    props:['pnr','copyUrl'],
     data() {
         return {
             pnrData: JSON.parse(this.pnr)
@@ -29,6 +30,9 @@ export default {
         isActive(status) {
             // evalua el status y devuelve true o false
             return status == 0;
+        },
+        goToCopyPage() {
+            window.location.href = this.copyUrl;
         }
     },
     mounted(){

@@ -46558,7 +46558,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['homeUrl', 'changesUrl', 'passengersUrl', 'itinerariesCreate', 'itinerariesAll'],
+    props: ['homeUrl', 'changesUrl', 'passengerMain', 'itinerariesCreate', 'itinerariesAll'],
     data: function data() {
         return {};
     },
@@ -46611,9 +46611,14 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("li", { attrs: { role: "presentation" } }, [
+            _c("a", { attrs: { href: _vm.passengerMain } }, [
+              _c("i", { staticClass: "fa fa-user" }),
+              _vm._v("Pasageri")
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(3)
+          _vm._m(2)
         ])
       ]
     )
@@ -46656,17 +46661,6 @@ var staticRenderFns = [
         _c("span", { staticClass: "caret" })
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { attrs: { role: "presentation" } }, [
-      _c("a", { attrs: { href: "" } }, [
-        _c("i", { staticClass: "fa fa-user" }),
-        _vm._v("Pasageri")
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -48685,9 +48679,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['pnr'],
+    props: ['pnr', 'copyUrl'],
     data: function data() {
         return {
             pnrData: JSON.parse(this.pnr)
@@ -48698,6 +48693,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         isActive: function isActive(status) {
             // evalua el status y devuelve true o false
             return status == 0;
+        },
+        goToCopyPage: function goToCopyPage() {
+            window.location.href = this.copyUrl;
         }
     },
     mounted: function mounted() {}
@@ -48744,6 +48742,15 @@ var render = function() {
                   "\n                "
               )
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              staticStyle: { cursor: "pointer" },
+              on: { click: _vm.goToCopyPage }
+            },
+            [_c("i", { staticClass: "fa fa-copy" }), _vm._v("Copiar")]
           )
         ])
       ])
@@ -48939,7 +48946,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.outbound_dep_time != _vm.cData.outbound_dep_time
                   }
                 ]
@@ -48958,7 +48965,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.outbound_arr_time != _vm.cData.outbound_arr_time
                   }
                 ]
@@ -49196,7 +49203,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.return_dep_time != _vm.cData.return_dep_time
                   }
                 ]
@@ -49215,7 +49222,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.return_arr_time != _vm.cData.return_arr_time
                   }
                 ]
@@ -49449,7 +49456,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.outbound_scale_start_time !=
                       _vm.cData.outbound_scale_start_time
                   }
@@ -49469,7 +49476,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.outbound_scale_end_time !=
                       _vm.cData.outbound_scale_end_time
                   }
@@ -49701,7 +49708,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.return_scale_start_time !=
                       _vm.cData.return_scale_start_time
                   }
@@ -49721,7 +49728,7 @@ var render = function() {
               {
                 class: [
                   {
-                    warning:
+                    green:
                       _vm.iData.return_scale_end_time !=
                       _vm.cData.return_scale_end_time
                   }
@@ -49926,6 +49933,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // al crear el componente rescatamos los comentarios antiguos din db y 
         // los formateamos
         this.oldComments = this.parseComments(this.old_comments);
+        console.log(this.pnrData.status);
     }
 });
 
@@ -49953,55 +49961,57 @@ var render = function() {
         )
       }),
       _vm._v(" "),
-      _c("form", { staticClass: "form-horizontal" }, [
-        _c("div", { staticClass: "col-md-12 col-xs-12" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.comments,
-                  expression: "comments"
-                }
-              ],
-              staticClass: "form-control",
-              staticStyle: { width: "100%" },
-              attrs: { rows: "6", cols: "200", name: "comments" },
-              domProps: { value: _vm.comments },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+      _vm.pnrData.status == 1
+        ? _c("form", { staticClass: "form-horizontal" }, [
+            _c("div", { staticClass: "col-md-12 col-xs-12" }, [
+              _c("div", { staticClass: "input-group" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.comments,
+                      expression: "comments"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { width: "100%" },
+                  attrs: { rows: "6", cols: "200", name: "comments" },
+                  domProps: { value: _vm.comments },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.comments = $event.target.value
+                    }
                   }
-                  _vm.comments = $event.target.value
-                }
-              }
-            })
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3 col-xs-6" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      _vm.saveComments($event)
+                    }
+                  }
+                },
+                [_vm._v("Guarda")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 col-xs-6" }, [
+              _c("p", [_vm._v("Status : " + _vm._s(_vm.status))])
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 col-xs-6" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  $event.preventDefault()
-                  _vm.saveComments($event)
-                }
-              }
-            },
-            [_vm._v("Guarda")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 col-xs-6" }, [
-          _c("p", [_vm._v("Status : " + _vm._s(_vm.status))])
-        ])
-      ]),
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-3 col-xs-6" }),
       _vm._v(" "),

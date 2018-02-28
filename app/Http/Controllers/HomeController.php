@@ -22,13 +22,13 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(Itinerary $itinerary, Pnr $pnr, Change $change) {
+        $this->middleware('auth');
+
         $this->itinerary = $itinerary;
         $this->pnr = $pnr;
         $this->change = $change;
-
-        $this->middleware('auth');
-
     }
+    
     /**
      * Devuelve la view principal con algunas colleciones de datos
      *

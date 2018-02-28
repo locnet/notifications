@@ -24,7 +24,7 @@
                         <li><a v-bind:href="itinerariesAll">Todos</a></li>
                     </ul>
                 </li>
-                <li role="presentation"><a href=""><i class="fa fa-user"></i>Pasageri</a></li>
+                <li role="presentation"><a v-bind:href="passengerMain"><i class="fa fa-user"></i>Pasageri</a></li>
                 <li role="presentacion"><a href=""><i class="fa fa-plane"></i>Itinerarios</a></li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
 
 <script>
     export default {
-        props: ['homeUrl','changesUrl','passengersUrl', 'itinerariesCreate','itinerariesAll'],
+        props: ['homeUrl','changesUrl','passengerMain', 'itinerariesCreate','itinerariesAll'],
         data() {
             return {
                 

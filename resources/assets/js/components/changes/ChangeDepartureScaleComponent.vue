@@ -24,10 +24,10 @@
                     <tr>
                         <td><strong>Cambio</strong></td>
                         <td>{{ cData.outbound_scale_station }}</td>
-                        <td v-bind:class="[{'warning': iData.outbound_scale_start_time != cData.outbound_scale_start_time}]">
+                        <td v-bind:class="[{'green': iData.outbound_scale_start_time != cData.outbound_scale_start_time}]">
                             {{ cData.outbound_scale_start_time }}
                         </td>
-                        <td v-bind:class="[{'warning': iData.outbound_scale_end_time != cData.outbound_scale_end_time}]">
+                        <td v-bind:class="[{'green': iData.outbound_scale_end_time != cData.outbound_scale_end_time}]">
                             {{ cData.outbound_scale_end_time }}
                         </td>  
                     </tr>

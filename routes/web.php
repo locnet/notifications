@@ -34,6 +34,9 @@ Route::get('pnr/create/{change_id}','PnrController@create');
 Route::post('pnr/store','PnrController@store');
 Route::get('pnr/close/{id}', 'PnrController@close');
 
+// passengers
+Route::get('passenger', 'PassengerController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

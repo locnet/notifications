@@ -83,6 +83,11 @@
         color: #ffffff;
     }
     
+    .table>tbody>tr>td.green {
+        background-color: #17af22;
+        color: #ffffff;
+    }
+    
     .blue {
         color: #097c72;
     }

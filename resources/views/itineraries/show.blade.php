@@ -3,7 +3,8 @@
 @section('content')
     <div class="col-md-10 col-xs-12 animated fadeIn">
         <app-change-pnr-component 
-                    pnr="{{ $pnr }}">
+                    pnr="{{ $pnr }}"
+                    copy-url = "{{  url('pnr/create/'.$change->id) }}">
         </app-change-pnr-component>
         <app-change-departure-component
                     itinerary="{{ $itinerary }}"
@@ -26,7 +27,7 @@
                     itinerary="{{ $itinerary }}"
                     change="{{ $change }}"></app-change-return-scale-component>
         @endif
-
+        
         <app-change-comments-component
                     pnr="{{  $pnr }}"
                     old_comments ="{{ $old_comments }}"

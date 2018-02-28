@@ -24,10 +24,10 @@
                     <tr>
                         <td><strong>Cambio</strong></td>
                         <td>{{ cData.return_scale_station }}</td>
-                        <td v-bind:class="[{'warning': iData.return_scale_start_time != cData.return_scale_start_time}]">
+                        <td v-bind:class="[{'green': iData.return_scale_start_time != cData.return_scale_start_time}]">
                             {{ cData.return_scale_start_time }}
                         </td>
-                        <td v-bind:class="[{'warning': iData.return_scale_end_time != cData.return_scale_end_time}]">
+                        <td v-bind:class="[{'green': iData.return_scale_end_time != cData.return_scale_end_time}]">
                             {{ cData.return_scale_end_time }}
                         </td>  
                     </tr>

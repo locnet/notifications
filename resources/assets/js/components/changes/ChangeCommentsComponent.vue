@@ -3,8 +3,8 @@
         <ul v-for="(value,key) in oldComments" class="list-group">
             <li class="list-group-item" v-for="v in value">{{ v }}</li>
         </ul>
-        <form class="form-horizontal">
-            <div class="col-md-12 col-xs-12">
+        <form v-if="pnrData.status == 1"  class="form-horizontal">
+            <div   class="col-md-12 col-xs-12">
                 <div class="input-group">
                     <textarea  rows="6" cols="200" v-model="comments" class="form-control" name="comments"
                                 style="width:100%"></textarea>
@@ -91,6 +91,7 @@
             // al crear el componente rescatamos los comentarios antiguos din db y 
             // los formateamos
             this.oldComments = this.parseComments(this.old_comments);
+            console.log(this.pnrData.status);
         }
     }
 </script>

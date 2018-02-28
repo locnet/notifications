@@ -21,7 +21,12 @@ class PnrController extends Controller
 
     public function create ($change_id) {
         $change = $this->change::find($change_id);
-        return view('pnrs.create_pnr',compact('change'));
+        if ($change) {
+            return view('pnrs.create_pnr',compact('change'));
+        } else {
+            return view('error')->withMessage("No se ha encontrado el cambio que buscas!");
+        }
+        
     }
 
     /**

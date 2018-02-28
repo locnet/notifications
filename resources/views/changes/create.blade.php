@@ -6,7 +6,8 @@
     <div class="col-md-10 col-xs-12">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <h3 class="text-center">Notificacion de cambios en el itinerario: "{{ $itinerary->title }}"</h3>
+                <h3 class="text-center">Crear nueva notificacion de cambios en el itinerario:
+                     "{{ $itinerary->title }}"</h3>
             </div>
 
             <div class="panel-body">

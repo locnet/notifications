@@ -83,7 +83,9 @@
                     <app-left-menu-component
                         home-url = "{{ url('home') }}"
                         itineraries-create = "{{ url('itineraries/create') }}"
-                        itineraries-all = "{{ url('itineraries') }}">
+                        itineraries-copy = "{{ url('itineraries/copy') }}"
+                        itineraries-all = "{{ url('itineraries') }}"
+                        passenger-main = "{{ url('passenger') }}">
                     </app-left-menu-component>
                 </div>
                 @yield('content')
