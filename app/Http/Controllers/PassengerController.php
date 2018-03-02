@@ -26,7 +26,7 @@ class PassengerController extends Controller
      * @return @return \Illuminate\Http\Response
      */
     public function index() {
-        $passenger = $this->passenger->all();
+        $passenger = $this->pnr->all();
         return view('passengers.main',compact('passenger'));
     }
 

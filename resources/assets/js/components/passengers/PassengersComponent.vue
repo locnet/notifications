@@ -14,7 +14,7 @@
                                 v-on:click="showPaxPnrs(p.id), firstItem = p.id" 
                                 style="cursor:pointer"
                                 v-bind:class="[liStyle, {active: firstItem == p.id}]">
-                                {{ p.name }} / {{ p.phone}}
+                                {{ p.passenger }} / {{ p.phone}}
                             </li>
                         </ul>
                     </td>

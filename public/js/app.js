@@ -50185,7 +50185,7 @@ var render = function() {
                   [
                     _vm._v(
                       "\n                            " +
-                        _vm._s(p.name) +
+                        _vm._s(p.passenger) +
                         " / " +
                         _vm._s(p.phone) +
                         "\n                        "
