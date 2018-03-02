@@ -102,11 +102,29 @@ class PnrController extends Controller
         return "false";   
     }
 
+    /**
+     * cambia el estatus de este localizador
+     *
+     * @param int $id
+     * @return void
+     */
     public function close($id) {
         $p = $this->pnr->find($id);
         $p->status = 0;
 
         $p->update();
         return redirect('home');
+    }
+
+    /**
+     * devuelve los detalles de un localizador, mezclados con los del cambio
+     *
+     * @param string $pnr
+     * @return object
+     */
+    public function getPnrDetails($id) {
+        $p = $this->pnr->where('id',$id)->first();
+
+        return $this->change->find($p->change_id);
     }
 }

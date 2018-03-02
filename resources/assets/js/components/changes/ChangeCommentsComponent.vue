@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-12 col-xs-12">
-        <ul v-for="(value,key) in oldComments" class="list-group">
-            <li class="list-group-item" v-for="v in value">{{ v }}</li>
+        <ul v-for="(value,key) in oldComments" class="list-group" :key="key">
+            <li class="list-group-item" v-for="v in value" :key="v">{{ v }}</li>
         </ul>
         <form v-if="pnrData.status == 1"  class="form-horizontal">
             <div   class="col-md-12 col-xs-12">
@@ -17,7 +17,7 @@
                 <p>Status : {{ status }}</p>
             </div>
         </form>
-             <div class="col-md-3 col-xs-6"></div>
+             <div class="col-md-3 col-xs-6">
                 <a v-bind:href="close_notification_url"
                     v-if="pnrData.status == 1">
                     <button class="btn btn-warning">Cerrar notificacion</button></a>

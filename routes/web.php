@@ -33,9 +33,12 @@ Route::patch('itineraries/change/update', 'PnrController@updateComments');
 Route::get('pnr/create/{change_id}','PnrController@create');
 Route::post('pnr/store','PnrController@store');
 Route::get('pnr/close/{id}', 'PnrController@close');
+Route::get('pnr/details/{id}', 'PnrController@getPnrDetails');
 
 // passengers
 Route::get('passenger', 'PassengerController@index');
+Route::get('passenger/pnrs/{id}', 'PassengerController@getAllPnrs');
+
 
 Auth::routes();
 

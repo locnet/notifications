@@ -537,6 +537,12 @@ Vue.component('app-change-departure-scale-component', __webpack_require__(81));
 Vue.component('app-change-return-scale-component', __webpack_require__(84));
 Vue.component('app-change-comments-component', __webpack_require__(87));
 
+/**
+ * componentes vista pasageros
+ */
+Vue.component('app-passengers-component', __webpack_require__(90));
+Vue.component('app-pnr-component', __webpack_require__(93));
+
 var app = new Vue({
   el: '#app',
   router: router,
@@ -1180,7 +1186,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(90);
+module.exports = __webpack_require__(96);
 
 
 /***/ }),
@@ -49952,9 +49958,9 @@ var render = function() {
       _vm._l(_vm.oldComments, function(value, key) {
         return _c(
           "ul",
-          { staticClass: "list-group" },
+          { key: key, staticClass: "list-group" },
           _vm._l(value, function(v) {
-            return _c("li", { staticClass: "list-group-item" }, [
+            return _c("li", { key: v, staticClass: "list-group-item" }, [
               _vm._v(_vm._s(v))
             ])
           })
@@ -50013,15 +50019,15 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-3 col-xs-6" }),
-      _vm._v(" "),
-      _vm.pnrData.status == 1
-        ? _c("a", { attrs: { href: _vm.close_notification_url } }, [
-            _c("button", { staticClass: "btn btn-warning" }, [
-              _vm._v("Cerrar notificacion")
+      _c("div", { staticClass: "col-md-3 col-xs-6" }, [
+        _vm.pnrData.status == 1
+          ? _c("a", { attrs: { href: _vm.close_notification_url } }, [
+              _c("button", { staticClass: "btn btn-warning" }, [
+                _vm._v("Cerrar notificacion")
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ],
     2
   )
@@ -50038,6 +50044,420 @@ if (false) {
 
 /***/ }),
 /* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(91)
+/* template */
+var __vue_template__ = __webpack_require__(92)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/passengers/PassengersComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6a4fdaa5", Component.options)
+  } else {
+    hotAPI.reload("data-v-6a4fdaa5", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// import bus event
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["passengers"],
+  data: function data() {
+    return {
+      pax: JSON.parse(this.passengers), // pasamos los pasageros a json
+      liStyle: 'list-group-item', // estilo css
+      firstItem: 0 // utilizado para cambiar el background del item selecionado
+    };
+  },
+
+  methods: {
+    showPaxPnrs: function showPaxPnrs(id) {
+      // cambio el background del td clickeado
+      this.firstItem = id;
+
+      // pedimos todos los pnr que tiene este pasagero 
+      axios.get("passenger/pnrs/" + id).then(function (response) {
+        // mandamos todo la respuesta por event bus al PnrComponent
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-4 col-xs-12 animated fadeIn" }, [
+    _c("table", { staticClass: "table table-striped table-bordered" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("tr", [
+          _c("td", [
+            _c(
+              "ul",
+              { staticClass: "list-group" },
+              _vm._l(_vm.pax, function(p, index) {
+                return _c(
+                  "li",
+                  {
+                    key: index,
+                    class: [_vm.liStyle, { active: _vm.firstItem == p.id }],
+                    staticStyle: { cursor: "pointer" },
+                    on: {
+                      click: function($event) {
+                        _vm.showPaxPnrs(p.id), (_vm.firstItem = p.id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(p.name) +
+                        " / " +
+                        _vm._s(p.phone) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              })
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "blue" }, [
+        _c("th", [_vm._v("Nombre / Telefono")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6a4fdaa5", module.exports)
+  }
+}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(94)
+/* template */
+var __vue_template__ = __webpack_require__(95)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/passengers/PnrComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0a3ed738", Component.options)
+  } else {
+    hotAPI.reload("data-v-0a3ed738", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// event bus
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            pnr: 'AAAAAA',
+            flight: 'Madrid -Bucuresti',
+            pnrObject: {},
+            length: 0,
+            passengerName: '',
+            departureStation: '',
+            arrivalStation: '',
+            outbound_dep_time: '',
+            outbound_arr_time: '',
+            return_dep_time: '',
+            return_arr_time: ''
+        };
+    },
+
+    methods: {
+        showPnrDetails: function showPnrDetails(id) {
+            var _this = this;
+
+            console.log("id: " + id);
+            var d = {};
+            // solicitamos los detalles del localizador 
+            axios.get('pnr/details/' + id).then(function (response) {
+                d = response.data;
+                _this.departureStation = d.departure_station;
+                _this.arrivalStation = d.arrival_station;
+                _this.outbound_dep_time = d.outbound_dep_time;
+                _this.outbound_arr_time = d.outbound_arr_time;
+                console.log(d);
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('paxWasClicked', function (data) {
+            // la propiedad "data" es un objeto que contiene otros objetos que son los localizadores (pnr)
+            // que pertenecen a un usuario en particular
+
+            _this2.pnrObject = data; // el objeto
+
+            _this2.passengerName = _this2.pnrObject[0].passenger;
+            _this2.pnr = data[0].pnr;
+            _this2.length = data.length; // longitud objeto, utilizado para reiteracion por el objeto
+        });
+    }
+});
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.passengerName.length > 0
+    ? _c("div", { staticClass: "col-md-6 col-xs-12 animated fadeIn" }, [
+        _c(
+          "ol",
+          { staticClass: "list-group" },
+          _vm._l(_vm.length, function(l, index) {
+            return _c(
+              "li",
+              {
+                key: index,
+                staticClass: "list-group-item",
+                staticStyle: { cursor: "pointer" },
+                on: {
+                  click: function($event) {
+                    _vm.showPnrDetails(_vm.pnrObject[index].id)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.pnrObject[index].pnr) +
+                    "\n        "
+                )
+              ]
+            )
+          })
+        ),
+        _vm._v(" "),
+        _c("table", { staticClass: "table table-bordered table-striped" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("IDA")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.outbound_dep_time))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.outbound_arr_time))])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ])
+      ])
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "blue" }, [
+        _c("th", [_vm._v("Segmento")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Salida")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Llegada")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", [_vm._v("VUELTA")]),
+      _vm._v(" "),
+      _c("td"),
+      _vm._v(" "),
+      _c("td")
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0a3ed738", module.exports)
+  }
+}
+
+/***/ }),
+/* 96 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

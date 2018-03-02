@@ -46,6 +46,11 @@ Vue.component('app-change-departure-scale-component', require('./components/chan
 Vue.component('app-change-return-scale-component', require('./components/changes/ChangeReturnScaleComponent.vue'));
 Vue.component('app-change-comments-component', require('./components/changes/ChangeCommentsComponent.vue'));
 
+/**
+ * componentes vista pasageros
+ */
+Vue.component('app-passengers-component', require('./components/passengers/PassengersComponent.vue'));
+Vue.component('app-pnr-component', require('./components/passengers/PnrComponent.vue'));
 
 const app = new Vue({
     el: '#app',
