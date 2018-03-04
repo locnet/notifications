@@ -19,6 +19,21 @@ class PnrController extends Controller
         $this->pnr = $pnr;
     }
 
+     /**
+     * @param 
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        $passenger = $this->pnr->all();
+        return view('passengers.main',compact('passenger'));
+    }
+
+    /**
+     * Formulario para crear una nueva entrada en Pnr
+     *
+     * @param int $change_id
+     * @return \Illumintate\Http\Response
+     */
     public function create ($change_id) {
         $change = $this->change::find($change_id);
         if ($change) {

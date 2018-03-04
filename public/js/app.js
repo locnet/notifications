@@ -50123,6 +50123,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // import bus event
 
@@ -50130,10 +50141,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["passengers"],
   data: function data() {
+    var _this = this;
+
     return {
       pax: JSON.parse(this.passengers), // pasamos los pasageros a json
       liStyle: 'list-group-item', // estilo css
-      firstItem: 0 // utilizado para cambiar el background del item selecionado
+      selectedItem: 0, // utilizado para cambiar el background del item selecionado
+      nameFilter: 'adrian',
+      namesArray: function namesArray() {
+        for (var p in pax) {
+          _this.push(p.passenger);
+        }
+      }
     };
   },
 
@@ -50143,7 +50162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.firstItem = id;
 
       // pedimos todos los pnr que tiene este pasagero 
-      axios.get("passenger/pnrs/" + id).then(function (response) {
+      axios.get("pnr/details/" + id).then(function (response) {
         // mandamos todo la respuesta por event bus al PnrComponent
         __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
       });
@@ -50159,55 +50178,88 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-4 col-xs-12 animated fadeIn" }, [
-    _c("table", { staticClass: "table table-striped table-bordered" }, [
-      _vm._m(0),
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-4 col-xs-12 animated fadeIn",
+      staticStyle: { height: "250px" }
+    },
+    [
+      _c("div", { staticClass: "col-md-12 col-xs-12" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Filtra por nombre" },
+            domProps: { value: _vm.nameFilter }
+          })
+        ])
+      ]),
       _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("td", [
-            _c(
-              "ul",
-              { staticClass: "list-group" },
-              _vm._l(_vm.pax, function(p, index) {
-                return _c(
-                  "li",
-                  {
-                    key: index,
-                    class: [_vm.liStyle, { active: _vm.firstItem == p.id }],
-                    staticStyle: { cursor: "pointer" },
-                    on: {
-                      click: function($event) {
-                        _vm.showPaxPnrs(p.id), (_vm.firstItem = p.id)
+      _c("table", { staticClass: "table table-striped table-bordered" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("tbody", [
+          _c("tr", [
+            _c("td", [
+              _c(
+                "ul",
+                { staticClass: "list-group" },
+                _vm._l(_vm.pax, function(p, index) {
+                  return _c(
+                    "li",
+                    {
+                      key: index,
+                      class: [
+                        _vm.liStyle,
+                        { active: _vm.selectedItem == p.id }
+                      ],
+                      staticStyle: { cursor: "pointer" },
+                      on: {
+                        click: function($event) {
+                          _vm.showPaxPnrs(p.id), (_vm.selectedItem = p.id)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(p.passenger) +
-                        " / " +
-                        _vm._s(p.phone) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              })
-            )
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(p.passenger) +
+                          " / " +
+                          _vm._s(p.phone) +
+                          " / " +
+                          _vm._s(p.pnr) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                })
+              )
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-search" }),
+      _vm._v("Filtra\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "blue" }, [
-        _c("th", [_vm._v("Nombre / Telefono")])
+        _c("th", [_vm._v("Nombre / Telefono / Localizador")])
       ])
     ])
   }
@@ -50303,12 +50355,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 // event bus
 
@@ -50317,49 +50363,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            pnr: 'AAAAAA',
-            flight: 'Madrid -Bucuresti',
-            pnrObject: {},
-            length: 0,
-            passengerName: '',
             departureStation: '',
             arrivalStation: '',
             outbound_dep_time: '',
             outbound_arr_time: '',
             return_dep_time: '',
-            return_arr_time: ''
+            return_arr_time: '',
+            showDetails: false
         };
     },
 
     methods: {
         showPnrDetails: function showPnrDetails(id) {
-            var _this = this;
-
             console.log("id: " + id);
             var d = {};
             // solicitamos los detalles del localizador 
             axios.get('pnr/details/' + id).then(function (response) {
                 d = response.data;
-                _this.departureStation = d.departure_station;
-                _this.arrivalStation = d.arrival_station;
-                _this.outbound_dep_time = d.outbound_dep_time;
-                _this.outbound_arr_time = d.outbound_arr_time;
+
                 console.log(d);
             });
         }
     },
     created: function created() {
-        var _this2 = this;
+        var _this = this;
 
         __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('paxWasClicked', function (data) {
+            // enseño la tabla de los detalles
+            _this.showDetails = true;
             // la propiedad "data" es un objeto que contiene otros objetos que son los localizadores (pnr)
             // que pertenecen a un usuario en particular
-
-            _this2.pnrObject = data; // el objeto
-
-            _this2.passengerName = _this2.pnrObject[0].passenger;
-            _this2.pnr = data[0].pnr;
-            _this2.length = data.length; // longitud objeto, utilizado para reiteracion por el objeto
+            console.log(data);
+            _this.departureStation = data.departure_station;
+            _this.arrivalStation = data.arrival_station;
+            _this.departureStation = data.departure_station;
+            _this.arrivalStation = data.arrival_station;
+            _this.outbound_dep_time = data.outbound_dep_time;
+            _this.outbound_arr_time = data.outbound_arr_time;
+            _this.return_dep_time = data.return_dep_time;
+            _this.return_arr_time = data.return_arr_time;
         });
     }
 });
@@ -50372,50 +50414,47 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.passengerName.length > 0
-    ? _c("div", { staticClass: "col-md-6 col-xs-12 animated fadeIn" }, [
+  return _vm.showDetails
+    ? _c("div", { staticClass: "col-md-6 col-xs-12  animated fadeIn" }, [
         _c(
-          "ol",
-          { staticClass: "list-group" },
-          _vm._l(_vm.length, function(l, index) {
-            return _c(
-              "li",
-              {
-                key: index,
-                staticClass: "list-group-item",
-                staticStyle: { cursor: "pointer" },
-                on: {
-                  click: function($event) {
-                    _vm.showPnrDetails(_vm.pnrObject[index].id)
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(_vm.pnrObject[index].pnr) +
-                    "\n        "
-                )
-              ]
-            )
-          })
-        ),
-        _vm._v(" "),
-        _c("table", { staticClass: "table table-bordered table-striped" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("IDA")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.outbound_dep_time))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.outbound_arr_time))])
-            ]),
+          "table",
+          {
+            staticClass: "table table-bordered table-striped table-responsive"
+          },
+          [
+            _vm._m(0),
             _vm._v(" "),
-            _vm._m(1)
-          ])
-        ])
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [_vm._v("IDA")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("strong", [_vm._v(_vm._s(_vm.departureStation) + ":  ")]),
+                  _vm._v(_vm._s(_vm.outbound_dep_time))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("strong", [_vm._v(_vm._s(_vm.arrivalStation) + ": ")]),
+                  _vm._v(_vm._s(_vm.outbound_arr_time))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [_vm._v("VUELTA")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("strong", [_vm._v(_vm._s(_vm.arrivalStation) + ": ")]),
+                  _vm._v(_vm._s(_vm.return_dep_time))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("strong", [_vm._v(_vm._s(_vm.departureStation) + ": ")]),
+                  _vm._v(_vm._s(_vm.return_arr_time))
+                ])
+              ])
+            ])
+          ]
+        )
       ])
     : _vm._e()
 }
@@ -50432,18 +50471,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Llegada")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", [_vm._v("VUELTA")]),
-      _vm._v(" "),
-      _c("td"),
-      _vm._v(" "),
-      _c("td")
     ])
   }
 ]

@@ -1,9 +1,20 @@
 <template>
-    <div class="col-md-4 col-xs-12 animated fadeIn">
+    <div class="col-md-4 col-xs-12 animated fadeIn" style="height: 250px">
+        <div class="col-md-12 col-xs-12">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-search"></i>Filtra
+                </div>
+                <input type="text" class="form-control"
+                        placeholder="Filtra por nombre"
+                        v-bind:value="nameFilter">
+            </div>
+        </div>
+      
         <table class="table table-striped table-bordered">
             <thead>
                 <tr class="blue">
-                    <th>Nombre / Telefono</th>
+                    <th>Nombre / Telefono / Localizador</th>
                 </tr>                  
             </thead>
             <tbody>
@@ -11,10 +22,10 @@
                     <td>
                         <ul class="list-group">
                             <li v-for="(p,index) in pax" :key="index"
-                                v-on:click="showPaxPnrs(p.id), firstItem = p.id" 
+                                v-on:click="showPaxPnrs(p.id), selectedItem = p.id" 
                                 style="cursor:pointer"
-                                v-bind:class="[liStyle, {active: firstItem == p.id}]">
-                                {{ p.passenger }} / {{ p.phone}}
+                                v-bind:class="[liStyle, {active: selectedItem == p.id}]">
+                                {{ p.passenger }} / {{ p.phone}} / {{ p.pnr }}
                             </li>
                         </ul>
                     </td>
@@ -35,7 +46,13 @@ export default {
     return {
       pax: JSON.parse(this.passengers),  // pasamos los pasageros a json
       liStyle: 'list-group-item',        // estilo css
-      firstItem: 0                       // utilizado para cambiar el background del item selecionado
+      selectedItem: 0,                      // utilizado para cambiar el background del item selecionado
+      nameFilter: 'adrian',
+      namesArray: () => {
+          for (var p in pax) {
+              this.push(p.passenger);
+          }
+      }
     };
   },
   methods: {
@@ -44,11 +61,12 @@ export default {
       this.firstItem = id;
 
       // pedimos todos los pnr que tiene este pasagero 
-      axios.get("passenger/pnrs/" + id).then(response => {
+      axios.get("pnr/details/" + id).then(response => {
         // mandamos todo la respuesta por event bus al PnrComponent
         eventBus.$emit("paxWasClicked", response.data);
       });
-    }
+    },
+   
   }
 };
 </script>

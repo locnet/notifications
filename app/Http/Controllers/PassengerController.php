@@ -21,21 +21,4 @@ class PassengerController extends Controller
         $this->itinerary = $itinerary;
     }
 
-    /**
-     * @param 
-     * @return @return \Illuminate\Http\Response
-     */
-    public function index() {
-        $passenger = $this->pnr->all();
-        return view('passengers.main',compact('passenger'));
-    }
-
-    /**
-     * @param integer $id el id del pasagero
-     */
-    public function getAllPnrs($id) {
-        //$id = $request->id;
-        $pax = $this->passenger->find($id);
-        return $this->pnr->where('passenger',$id)->get();
-    }
 }
