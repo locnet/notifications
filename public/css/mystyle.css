@@ -92,6 +92,12 @@
         color: #044c46;
         background-color: #dfe6e4;
     }
+    /*------------PASAGEROS------------------*/
+    
+    td>.list-group {
+        overflow-y: auto;
+        height: 250px;
+    }
     /*--------------MEDIA QUERIES---------------------*/
     
     @media (min-width: 990px) {

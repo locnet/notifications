@@ -41,32 +41,31 @@
 import { eventBus } from "../../app.js";
 
 export default {
-  props: ["passengers"],
-  data() {
-    return {
-      pax: JSON.parse(this.passengers),  // pasamos los pasageros a json
-      liStyle: 'list-group-item',        // estilo css
-      selectedItem: 0,                      // utilizado para cambiar el background del item selecionado
-      nameFilter: 'adrian',
-      namesArray: () => {
-          for (var p in pax) {
-              this.push(p.passenger);
-          }
-      }
-    };
-  },
-  methods: {
-    showPaxPnrs(id) {
-      // cambio el background del td clickeado
-      this.firstItem = id;
-
-      // pedimos todos los pnr que tiene este pasagero 
-      axios.get("pnr/details/" + id).then(response => {
-        // mandamos todo la respuesta por event bus al PnrComponent
-        eventBus.$emit("paxWasClicked", response.data);
-      });
+    props: ["passengers"],
+    data() {
+        return {
+            pax: JSON.parse(this.passengers),  // pasamos los pasageros a json
+            liStyle: 'list-group-item',        // estilo css
+            selectedItem: 0,                   // utilizado para cambiar el background del item selecionado
+            nameFilter: 'adrian',
+            namesArray: () => {
+                for (var p in pax) {
+                    this.push(p.passenger);
+                }
+            }
+        };
     },
-   
-  }
+    methods: {
+        showPaxPnrs(id) {
+            // cambio el background del td clickeado
+            this.firstItem = id;
+
+            // pedimos todos los pnr que tiene este pasagero 
+            axios.get("pnr/details/" + id).then(response => {
+                // mandamos todo la respuesta por event bus al PnrComponent
+                eventBus.$emit("paxWasClicked", response.data);
+            });
+        }   
+    }
 };
 </script>

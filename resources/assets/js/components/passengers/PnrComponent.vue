@@ -51,8 +51,6 @@ export default {
             axios.get('pnr/details/' + id)
             .then( response => {
                 d = response.data;
-                
-                console.log(d);
             })
         }
     },
