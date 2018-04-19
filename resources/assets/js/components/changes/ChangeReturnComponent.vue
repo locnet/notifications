@@ -25,8 +25,8 @@
                     </tr>
                     <tr>
                         <td><strong>Cambio</strong></td>
-                        <td>{{ cData.departure_station }}</td>
                         <td>{{ cData.arrival_station }}</td>
+                        <td>{{ cData.departure_station }}</td>
                         <td v-bind:class="[{'green': iData.return_dep_time != cData.return_dep_time}]">
                             {{ cData.return_dep_time }}
                         </td>

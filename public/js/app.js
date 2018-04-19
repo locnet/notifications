@@ -49200,9 +49200,9 @@ var render = function() {
           _c("tr", [
             _vm._m(2),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.cData.departure_station))]),
-            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(_vm.cData.arrival_station))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.cData.departure_station))]),
             _vm._v(" "),
             _c(
               "td",
@@ -50139,35 +50139,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["passengers"],
-  data: function data() {
-    var _this = this;
+    props: ["passengers"],
+    data: function data() {
+        var _this = this;
 
-    return {
-      pax: JSON.parse(this.passengers), // pasamos los pasageros a json
-      liStyle: 'list-group-item', // estilo css
-      selectedItem: 0, // utilizado para cambiar el background del item selecionado
-      nameFilter: 'adrian',
-      namesArray: function namesArray() {
-        for (var p in pax) {
-          _this.push(p.passenger);
+        return {
+            pax: JSON.parse(this.passengers), // pasamos los pasageros a json
+            liStyle: 'list-group-item', // estilo css
+            selectedItem: 0, // utilizado para cambiar el background del item selecionado
+            nameFilter: 'adrian',
+            namesArray: function namesArray() {
+                for (var p in pax) {
+                    _this.push(p.passenger);
+                }
+            }
+        };
+    },
+
+    methods: {
+        showPaxPnrs: function showPaxPnrs(id) {
+            // cambio el background del td clickeado
+            this.firstItem = id;
+
+            // pedimos todos los pnr que tiene este pasagero 
+            axios.get("pnr/details/" + id).then(function (response) {
+                // mandamos todo la respuesta por event bus al PnrComponent
+                __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
+            });
         }
-      }
-    };
-  },
-
-  methods: {
-    showPaxPnrs: function showPaxPnrs(id) {
-      // cambio el background del td clickeado
-      this.firstItem = id;
-
-      // pedimos todos los pnr que tiene este pasagero 
-      axios.get("pnr/details/" + id).then(function (response) {
-        // mandamos todo la respuesta por event bus al PnrComponent
-        __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
-      });
     }
-  }
 });
 
 /***/ }),
@@ -50380,8 +50380,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // solicitamos los detalles del localizador 
             axios.get('pnr/details/' + id).then(function (response) {
                 d = response.data;
-
-                console.log(d);
             });
         }
     },
