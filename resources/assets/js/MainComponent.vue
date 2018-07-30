@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="pnr in pnrsData" v-show="checkStatus(pnr.status)">
+                        <tr v-for="(pnr,index) in pnrsData" v-show="checkStatus(pnr.status)" :key="index">
                             <td>{{ pnr.passenger }}</td>
                             <td>{{ pnr.pnr.toUpperCase() }}</td>
                             <td class="hidden-xs">{{ pnr.comments.substring(0,80) }}</td>

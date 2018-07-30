@@ -48,13 +48,13 @@ class ChangeController extends Controller
     }
 
     /**
-     * inserta un nuevo cambio en la base de datos
+     * registrar el cambio en la base de datos
      *
      * @param Request $request
      * @return App\Change
      */
     public function store(Request $request) {
-        // validamos formulario
+        // validamos el formulario
         $validatedData = $this->validate($request,[
             'itinerary_id' => 'required',
             'departure_station' => 'required',
@@ -110,27 +110,33 @@ class ChangeController extends Controller
             // db
             $data['return_dep_time'] = $request->return_dep_date.' '.$request->return_dep_hour;
             $data['return_arr_time'] = $request->return_arr_date.' '.$request->return_arr_hour;
+
+            // si el vuelo de vuelta tiene escala
+            if ($request->return_scale == 1) {
+                $this->validate($request,[
+                    'return_scale_station' => 'required',
+                    'return_scale_start_date' => 'required',
+                    'return_scale_start_hour' => 'required',
+                    'return_scale_end_date' => 'required',
+                    'return_scale_end_hour' => 'required'
+                ]);
+                
+                //db
+                $data['return_scale_start_time'] = $request->return_scale_start_date.' '.$request->return_scale_start_hour;
+                $data['return_scale_end_time'] = $request->return_scale_end_date.' '.$request->return_scale_end_hour;
+            }
         } 
 
-        // si el vuelo de vuelta tiene escala
-        if ($request->return_scale == 1) {
-            $this->validate($request,[
-                'return_scale_station' => 'required',
-                'return_scale_start_date' => 'required',
-                'return_scale_start_hour' => 'required',
-                'return_scale_end_date' => 'required',
-                'return_scale_end_hour' => 'required'
-            ]);
-            
-            //db
-            $data['return_scale_start_time'] = $request->return_scale_start_date.' '.$request->return_scale_start_hour;
-            $data['return_scale_end_time'] = $request->return_scale_end_date.' '.$request->return_scale_end_hour;
-        }
+       
 
         // si el itinerario se ha creado corectamente el siguiente paso es 
-        // crear el cambio que afecta al itinerario
+        // crear el registro con el cambio que afecta al itinerario
+    
         if ( $c = $this->change::firstOrCreate($data)) {
             return redirect('pnr/create/'.$c->id);
+        } else {
+            // un error ha ocurido
+            return view('error')->withMessage("No se ha podido insertar el itinerario en la base de datos");
         }
     }
     /**

@@ -21,7 +21,7 @@
                 <tr >
                     <td>
                         <ul class="list-group">
-                            <li v-for="(p,index) in pax" :key="index"
+                            <li v-for="(p,index) in filteredItems" :key="index"
                                 v-on:click="showPaxPnrs(p.id), selectedItem = p.id" 
                                 style="cursor:pointer"
                                 v-bind:class="[liStyle, {active: selectedItem == p.id}]">
@@ -47,7 +47,7 @@ export default {
             pax: JSON.parse(this.passengers),  // pasamos los pasageros a json
             liStyle: 'list-group-item',        // estilo css
             selectedItem: 0,                   // utilizado para cambiar el background del item selecionado
-            nameFilter: 'adrian',
+            nameFilter: '',
             namesArray: () => {
                 for (var p in pax) {
                     this.push(p.passenger);
@@ -66,6 +66,14 @@ export default {
                 eventBus.$emit("paxWasClicked", response.data);
             });
         }   
+    },
+    computed: {
+    filteredItems() {
+      return this.pax.filter(item => {
+          
+         return item.passenger.match(this.nameFilter);
+      })
     }
+  }
 };
 </script>

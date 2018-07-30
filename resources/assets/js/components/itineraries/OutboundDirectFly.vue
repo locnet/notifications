@@ -97,7 +97,7 @@ export default {
         // el listener esta en OutboundScaleFly
         setOutboundScale() {
                 eventBus.$emit('outboundFlightType',this.outboundScale);
-            }
+        }
     }
 }
 </script>

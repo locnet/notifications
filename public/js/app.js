@@ -46374,7 +46374,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.pnrsData, function(pnr) {
+              _vm._l(_vm.pnrsData, function(pnr, index) {
                 return _c(
                   "tr",
                   {
@@ -46385,7 +46385,8 @@ var render = function() {
                         value: _vm.checkStatus(pnr.status),
                         expression: "checkStatus(pnr.status)"
                       }
-                    ]
+                    ],
+                    key: index
                   },
                   [
                     _c("td", [_vm._v(_vm._s(pnr.passenger))]),
@@ -50147,7 +50148,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pax: JSON.parse(this.passengers), // pasamos los pasageros a json
             liStyle: 'list-group-item', // estilo css
             selectedItem: 0, // utilizado para cambiar el background del item selecionado
-            nameFilter: 'adrian',
+            nameFilter: '',
             namesArray: function namesArray() {
                 for (var p in pax) {
                     _this.push(p.passenger);
@@ -50165,6 +50166,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("pnr/details/" + id).then(function (response) {
                 // mandamos todo la respuesta por event bus al PnrComponent
                 __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
+            });
+        }
+    },
+    computed: {
+        filteredItems: function filteredItems() {
+            var _this2 = this;
+
+            return this.pax.filter(function (item) {
+
+                return item.passenger.match(_this2.nameFilter);
             });
         }
     }
@@ -50206,7 +50217,7 @@ var render = function() {
               _c(
                 "ul",
                 { staticClass: "list-group" },
-                _vm._l(_vm.pax, function(p, index) {
+                _vm._l(_vm.filteredItems, function(p, index) {
                   return _c(
                     "li",
                     {
@@ -50354,7 +50365,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 // event bus
 
@@ -50463,11 +50473,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "blue" }, [
-        _c("th", [_vm._v("Segmento")]),
+        _c("th", { staticStyle: { width: "20%" } }, [_vm._v("Segmento")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Salida")]),
+        _c("th", { staticStyle: { width: "40%" } }, [_vm._v("Salida")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Llegada")])
+        _c("th", { staticStyle: { width: "40%" } }, [_vm._v("Llegada")])
       ])
     ])
   }

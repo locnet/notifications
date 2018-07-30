@@ -1,15 +1,14 @@
 <template>
     <div v-if="showDetails" class="col-md-6 col-xs-12  animated fadeIn">
         
-        <table class="table table-bordered table-striped table-responsive"
-                        >
+        <table class="table table-bordered table-striped table-responsive">
             <thead>
                 <tr class="blue">
-                    <th>Segmento</th>
-                    <th>Salida</th>
-                    <th>Llegada</th>
+                    <th style="width:20%">Segmento</th>
+                    <th style="width:40%">Salida</th>
+                    <th style="width:40%">Llegada</th>
                 </tr>
-            </thead>
+            </thead> 
             <tbody>
                 <tr>
                     <td>IDA</td>
@@ -68,8 +67,7 @@ export default {
             this.outbound_dep_time = data.outbound_dep_time;
             this.outbound_arr_time = data.outbound_arr_time;
             this.return_dep_time = data.return_dep_time;
-            this.return_arr_time = data.return_arr_time;
-           
+            this.return_arr_time = data.return_arr_time;           
         });
     }
 }
