@@ -3,7 +3,20 @@
         <div class="col-md-12">
             <h4>Vuelo de ida</h4>
         </div>
-        
+        <div class="col-md-2 col-xs-12">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-hand-stop-o"></i>
+                </div>
+                <select name="outbound_scale" @change="setOutboundScale" 
+                        v-model="outboundScale" class="form-control">
+                    <option value = 0 
+                        :selected ="outboundScale == 0">No</option>
+                    <option value = 1
+                        :selected ="outboundScale == 1">Si</option>
+                </select>                                                    
+            </div>
+        </div>
         <div class="col-md-3 col-xs-7">
             <div v-bind:class="[inputGroup,
                         {'has-error': hasErrors.outbound_dep_date !== undefined }]">
@@ -50,20 +63,6 @@
                         name="outbound_arr_hour"
                         placeholder="Hora llegada"
                         v-bind:value="outbound_arr_hour" />
-            </div>
-        </div>
-        <div class="col-md-2 col-xs-12">
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-hand-stop-o"></i>
-                </div>
-                <select name="outbound_scale" @change="setOutboundScale" 
-                        v-model="outboundScale" class="form-control">
-                    <option value = 0 
-                        :selected ="outboundScale == 0">No</option>
-                    <option value = 1
-                        :selected ="outboundScale == 1">Si</option>
-                </select>                                                    
             </div>
         </div>
     </div>

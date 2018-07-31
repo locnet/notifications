@@ -86,7 +86,11 @@
                     'Oct','Nov','Dic'];
 
     var dateFormat = "%Y-%m-%d";
+    var rangeConv = new AnyTime.Converter({ format: dateFormat });
     var minDay = '';
+    var dayLater = '';
+    var arrivalDay = '';
+    var scaleDay = '';
     /*--------- VUELO IDA --------*/
     $('#outbound_dep_date').AnyTime_picker(
         { 
@@ -102,9 +106,10 @@
     // que no pueda seleccionar un dia anterior para la fecha de llegada
     $('#outbound_dep_date').change(
         function (e) {
-            var rangeConv = new AnyTime.Converter({ format: dateFormat });
+            var oneDay = 24*60*60*1000;   // milisecundos de un dia            
             var actualDay = rangeConv.parse($("#outbound_dep_date").val()).getTime();
             minDay = new Date(actualDay);
+            dayLater = new Date(actualDay + oneDay);  // para el vuelo de vuelta
             $('#outbound_arr_date').AnyTime_noPicker()
                                     .val(rangeConv.format(minDay))
                                     .AnyTime_picker(
@@ -113,9 +118,42 @@
                                             format: dateFormat
                                         }
                                     );
-            // activo el picker de la fecha del llegada (por defecto esta desactivado
+            // habilito el picker de la fecha del llegada (por defecto esta desabilitado
             // hasta que se elige una fecha de salida)
-            $('#outbound_arr_date').removeAttr('disabled','disabled');  
+            $('#outbound_arr_date').removeAttr('disabled','disabled');
+
+            // me aseguro que no se pueda elegir para el vuelo de vuelta un 
+            // dia anterior al vuelo de ida
+            $('#return_dep_date').AnyTime_noPicker()
+                                .val(rangeConv.format(dayLater))
+                                .AnyTime_picker(
+                                    {
+                                        earliest: dayLater,
+                                        format: dateFormat
+                                    }
+                                );
+
+            // cuando se elige una fecha para el vuelo de ida hay que poner esta
+            // fecha como fecha minima en los pickers de la (eventual) escala
+            // en el caso de que la fecha de llegada no es la misma que la fecha de ida
+            // cambiamos la fecha minima de los pickers de escala mas abajo
+            // en el listener change del outbound_arr_date
+
+            arrivalDay = rangeConv.parse($("#outbound_arr_date").val()).getTime();
+            scaleDay = new Date(arrivalDay);
+            $('#outbound_scale_start_date').AnyTime_noPicker()
+                                        .val(rangeConv.format(scaleDay))
+                                        .AnyTime_picker({
+                                            earliest: scaleDay,
+                                            format: dateFormat
+                                        });
+
+            $('#outbound_scale_end_date').AnyTime_noPicker()
+                                        .val(rangeConv.format(scaleDay))
+                                        .AnyTime_picker({
+                                            earliest: scaleDay,
+                                            format: dateFormat
+                                        });
         }
         
     );
@@ -138,6 +176,7 @@
             monthAbbreviations: mesesAbb
         }).attr('disabled',true);
 
+    
     $("#outbound_arr_hour").AnyTime_picker(
         { 
             format: "%H:%i", labelTitle: "Hora",
@@ -158,7 +197,6 @@
     // que no pueda seleccionar un dia anterior para la fecha de llegada
     $('#outbound_scale_start_date').change(
         function (e) {
-            var rangeConv = new AnyTime.Converter({ format: dateFormat });
             var actualDay = rangeConv.parse($("#outbound_scale_start_date").val()).getTime();
             minDay = new Date(actualDay);
             $('#outbound_scale_end_date').AnyTime_noPicker()
@@ -169,9 +207,7 @@
                                             format: dateFormat
                                         }
                                     );
-            // activo el picker de la fecha del llegada (por defecto esta desactivado
-            // hasta que se elige una fecha de salida)
-            $('#outbound_scale_end_date').removeAttr('disabled','disabled');  
+            
         }
     );
     $("#outbound_scale_start_hour").AnyTime_picker(
@@ -188,7 +224,7 @@
             dayAbbreviations: diasAbb,
             monthNames: meses,
             monthAbbreviations: mesesAbb
-        }).attr('disabled',true);
+        });
 
     $("#outbound_scale_end_hour").AnyTime_picker(
         { 
@@ -206,14 +242,14 @@
             dayNames: dias,
             dayAbbreviations: diasAbb,
             monthNames: meses,
-            monthAbbreviations: mesesAbb
+            monthAbbreviations: mesesAbb,
+            earliest: dayLater
         });
 
     // cuando se establece la fecha de salida me aseguro
     // que no pueda seleccionar un dia anterior para la fecha de llegada
     $('#return_dep_date').change(
         function (e) {
-            var rangeConv = new AnyTime.Converter({ format: dateFormat });
             var actualDay = rangeConv.parse($("#return_dep_date").val()).getTime();
             minDay = new Date(actualDay);
             $('#return_arr_date').AnyTime_noPicker()
@@ -224,9 +260,25 @@
                                             format: dateFormat
                                         }
                                     );
-            // activo el picker de la fecha del llegada (por defecto esta desactivado
+            // habilito el picker de la fecha del llegada (por defecto esta desactivado
             // hasta que se elige una fecha de salida)
-            $('#return_arr_date').removeAttr('disabled','disabled');  
+            $('#return_arr_date').removeAttr('disabled','disabled');
+
+            // cuando se elige una fecha para el vuelo de vuelta hay que poner esta
+            // fecha como fecha minima en los pickers de la (eventual) escala
+            $('#return_scale_start_date').AnyTime_noPicker()
+                                        .val(rangeConv.format(minDay))
+                                        .AnyTime_picker({
+                                            earliest: minDay,
+                                            format: dateFormat
+                                        });
+
+            $('#return_scale_end_date').AnyTime_noPicker()
+                                        .val(rangeConv.format(minDay))
+                                        .AnyTime_picker({
+                                            earliest: minDay,
+                                            format: dateFormat
+                                        });
         }
     );
     $("#return_dep_hour").AnyTime_picker(
@@ -267,7 +319,6 @@
     // que no pueda seleccionar un dia anterior para la fecha de llegada
     $('#return_scale_start_date').change(
         function (e) {
-            var rangeConv = new AnyTime.Converter({ format: dateFormat });
             var actualDay = rangeConv.parse($("#return_scale_start_date").val()).getTime();
             minDay = new Date(actualDay);
             $('#return_scale_end_date').AnyTime_noPicker()
@@ -278,9 +329,7 @@
                                             format: dateFormat
                                         }
                                     );
-            // activo el picker de la fecha del llegada (por defecto esta desactivado
-            // hasta que se elige una fecha de salida)
-            $('#return_scale_end_date').removeAttr('disabled','disabled');  
+            
         }
     );
     $("#return_scale_start_hour").AnyTime_picker(
@@ -297,7 +346,7 @@
             dayAbbreviations: diasAbb,
             monthNames: meses,
             monthAbbreviations: mesesAbb
-        }).attr('disabled',true);
+        });
 
     $("#return_scale_end_hour").AnyTime_picker(
         { 

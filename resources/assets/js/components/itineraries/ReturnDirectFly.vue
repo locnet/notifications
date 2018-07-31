@@ -5,6 +5,20 @@
             <h4>Vuelo de vuelta</h4>
         </div>
 
+        <div class="col-md-2 col-xs-6">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-hand-stop-o"></i>
+                </div>
+                <select name="return_scale" @change="setReturnScale" 
+                        v-model="returnScale" class="form-control">
+                    <option value = 0 
+                        :selected ="returnScale == 0">No</option>
+                    <option value = 1
+                        :selected ="returnScale ==1">Si</option>
+                </select>                                                    
+            </div>
+        </div>
         <div class="col-md-3 col-xs-7">
             <div v-bind:class="[inputGroup,
                         {'has-error': hasErrors.return_dep_date !== undefined }]">
@@ -52,20 +66,6 @@
                         name="return_arr_hour"
                         placeholder="Hora llegada"
                         v-bind:value="return_arr_hour" />
-            </div>
-        </div>
-        <div class="col-md-2 col-xs-6">
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-hand-stop-o"></i>
-                </div>
-                <select name="return_scale" @change="setReturnScale" 
-                        v-model="returnScale" class="form-control">
-                    <option value = 0 
-                        :selected ="returnScale == 0">No</option>
-                    <option value = 1
-                        :selected ="returnScale ==1">Si</option>
-                </select>                                                    
             </div>
         </div> 
     </div>

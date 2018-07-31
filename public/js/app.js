@@ -47181,7 +47181,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 // import the bus
@@ -47226,113 +47225,9 @@ var render = function() {
   return _c("div", { staticClass: "row outbound" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-3 col-xs-7" }, [
-      _c(
-        "div",
-        {
-          class: [
-            _vm.inputGroup,
-            { "has-error": _vm.hasErrors.outbound_dep_date !== undefined }
-          ]
-        },
-        [
-          _vm._m(1),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "outbound_dep_date",
-              name: "outbound_dep_date",
-              placeholder: "Fecha salida"
-            },
-            domProps: { value: _vm.outbound_dep_date }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-2 col-xs-5" }, [
-      _c(
-        "div",
-        {
-          class: [
-            _vm.inputGroup,
-            { "has-error": _vm.hasErrors.outbound_dep_hour !== undefined }
-          ]
-        },
-        [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "outbound_dep_hour",
-              name: "outbound_dep_hour",
-              placeholder: "Hora salida"
-            },
-            domProps: { value: _vm.outbound_dep_hour }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-3 col-xs-7" }, [
-      _c(
-        "div",
-        {
-          class: [
-            _vm.inputGroup,
-            { "has-error": _vm.hasErrors.outbound_arr_date !== undefined }
-          ]
-        },
-        [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "outbound_arr_date",
-              name: "outbound_arr_date",
-              placeholder: "Fecha llegada"
-            },
-            domProps: { value: _vm.outbound_arr_date }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-2 col-xs-5" }, [
-      _c(
-        "div",
-        {
-          class: [
-            _vm.inputGroup,
-            { "has-error": _vm.hasErrors.outbound_arr_hour !== undefined }
-          ]
-        },
-        [
-          _vm._m(4),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "outbound_arr_hour",
-              name: "outbound_arr_hour",
-              placeholder: "Hora llegada"
-            },
-            domProps: { value: _vm.outbound_arr_hour }
-          })
-        ]
-      )
-    ]),
-    _vm._v(" "),
     _c("div", { staticClass: "col-md-2 col-xs-12" }, [
       _c("div", { staticClass: "input-group" }, [
-        _vm._m(5),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "select",
@@ -47387,6 +47282,110 @@ var render = function() {
           ]
         )
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-3 col-xs-7" }, [
+      _c(
+        "div",
+        {
+          class: [
+            _vm.inputGroup,
+            { "has-error": _vm.hasErrors.outbound_dep_date !== undefined }
+          ]
+        },
+        [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "outbound_dep_date",
+              name: "outbound_dep_date",
+              placeholder: "Fecha salida"
+            },
+            domProps: { value: _vm.outbound_dep_date }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-2 col-xs-5" }, [
+      _c(
+        "div",
+        {
+          class: [
+            _vm.inputGroup,
+            { "has-error": _vm.hasErrors.outbound_dep_hour !== undefined }
+          ]
+        },
+        [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "outbound_dep_hour",
+              name: "outbound_dep_hour",
+              placeholder: "Hora salida"
+            },
+            domProps: { value: _vm.outbound_dep_hour }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-3 col-xs-7" }, [
+      _c(
+        "div",
+        {
+          class: [
+            _vm.inputGroup,
+            { "has-error": _vm.hasErrors.outbound_arr_date !== undefined }
+          ]
+        },
+        [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "outbound_arr_date",
+              name: "outbound_arr_date",
+              placeholder: "Fecha llegada"
+            },
+            domProps: { value: _vm.outbound_arr_date }
+          })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-2 col-xs-5" }, [
+      _c(
+        "div",
+        {
+          class: [
+            _vm.inputGroup,
+            { "has-error": _vm.hasErrors.outbound_arr_hour !== undefined }
+          ]
+        },
+        [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "outbound_arr_hour",
+              name: "outbound_arr_hour",
+              placeholder: "Hora llegada"
+            },
+            domProps: { value: _vm.outbound_arr_hour }
+          })
+        ]
+      )
     ])
   ])
 }
@@ -47397,6 +47396,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12" }, [
       _c("h4", [_vm._v("Vuelo de ida")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-hand-stop-o" })
     ])
   },
   function() {
@@ -47431,14 +47438,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-addon" }, [
       _c("i", { staticClass: "fa fa-clock-o" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "fa fa-hand-stop-o" })
     ])
   }
 ]
@@ -48017,113 +48016,9 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-3 col-xs-7" }, [
-        _c(
-          "div",
-          {
-            class: [
-              _vm.inputGroup,
-              { "has-error": _vm.hasErrors.return_dep_date !== undefined }
-            ]
-          },
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "return_dep_date",
-                name: "return_dep_date",
-                placeholder: "Fecha salida"
-              },
-              domProps: { value: _vm.return_dep_date }
-            })
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-2 col-xs-5" }, [
-        _c(
-          "div",
-          {
-            class: [
-              _vm.inputGroup,
-              { "has-error": _vm.hasErrors.return_dep_hour !== undefined }
-            ]
-          },
-          [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "return_dep_hour",
-                name: "return_dep_hour",
-                placeholder: "Hora salida"
-              },
-              domProps: { value: _vm.return_dep_hour }
-            })
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-3 col-xs-7" }, [
-        _c(
-          "div",
-          {
-            class: [
-              _vm.inputGroup,
-              { "has-error": _vm.hasErrors.return_arr_date !== undefined }
-            ]
-          },
-          [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "return_arr_date",
-                name: "return_arr_date",
-                placeholder: "Fecha llegada"
-              },
-              domProps: { value: _vm.return_arr_date }
-            })
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-2 col-xs-5" }, [
-        _c(
-          "div",
-          {
-            class: [
-              _vm.inputGroup,
-              { "has-error": _vm.hasErrors.return_arr_hour !== undefined }
-            ]
-          },
-          [
-            _vm._m(4),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "return_arr_hour",
-                name: "return_arr_hour",
-                placeholder: "Hora llegada"
-              },
-              domProps: { value: _vm.return_arr_hour }
-            })
-          ]
-        )
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "col-md-2 col-xs-6" }, [
         _c("div", { staticClass: "input-group" }, [
-          _vm._m(5),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "select",
@@ -48178,6 +48073,110 @@ var render = function() {
             ]
           )
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 col-xs-7" }, [
+        _c(
+          "div",
+          {
+            class: [
+              _vm.inputGroup,
+              { "has-error": _vm.hasErrors.return_dep_date !== undefined }
+            ]
+          },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "return_dep_date",
+                name: "return_dep_date",
+                placeholder: "Fecha salida"
+              },
+              domProps: { value: _vm.return_dep_date }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2 col-xs-5" }, [
+        _c(
+          "div",
+          {
+            class: [
+              _vm.inputGroup,
+              { "has-error": _vm.hasErrors.return_dep_hour !== undefined }
+            ]
+          },
+          [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "return_dep_hour",
+                name: "return_dep_hour",
+                placeholder: "Hora salida"
+              },
+              domProps: { value: _vm.return_dep_hour }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 col-xs-7" }, [
+        _c(
+          "div",
+          {
+            class: [
+              _vm.inputGroup,
+              { "has-error": _vm.hasErrors.return_arr_date !== undefined }
+            ]
+          },
+          [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "return_arr_date",
+                name: "return_arr_date",
+                placeholder: "Fecha llegada"
+              },
+              domProps: { value: _vm.return_arr_date }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2 col-xs-5" }, [
+        _c(
+          "div",
+          {
+            class: [
+              _vm.inputGroup,
+              { "has-error": _vm.hasErrors.return_arr_hour !== undefined }
+            ]
+          },
+          [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "return_arr_hour",
+                name: "return_arr_hour",
+                placeholder: "Hora llegada"
+              },
+              domProps: { value: _vm.return_arr_hour }
+            })
+          ]
+        )
       ])
     ]
   )
@@ -48189,6 +48188,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-12" }, [
       _c("h4", [_vm._v("Vuelo de vuelta")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-hand-stop-o" })
     ])
   },
   function() {
@@ -48223,14 +48230,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-addon" }, [
       _c("i", { staticClass: "fa fa-clock-o" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "fa fa-hand-stop-o" })
     ])
   }
 ]
