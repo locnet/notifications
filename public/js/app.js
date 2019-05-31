@@ -516,7 +516,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 var eventBus = new Vue();
 
 /**
- * Registrar componentes
+ * Componentes varios
  */
 
 Vue.component('app-main-component', __webpack_require__(46));
@@ -47973,7 +47973,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             inputGroup: 'input-group',
             hasErrors: JSON.parse(this.errors),
             returnScale: this.old_return_scale == '' ? 0 : this.old_return_scale,
-            oneWayFlight: this.old_flight_type == '' ? 1 : this.old_flight_type
+            oneWayFlight: this.old_flight_type == '' ? 0 : this.old_flight_type
         };
     },
 
@@ -47989,6 +47989,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('flightTypeChanged', function (flight) {
             _this.oneWayFlight = flight;
         });
+        console.log("esto es console log" + this.oneWayFlight);
     }
 });
 
@@ -49846,6 +49847,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //

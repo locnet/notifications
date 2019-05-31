@@ -25,7 +25,7 @@ export const eventBus = new Vue();
 
 
 /**
- * Registrar componentes
+ * Componentes varios
  */
 
 Vue.component('app-main-component', require('./MainComponent.vue'));

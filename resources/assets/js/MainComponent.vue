@@ -72,7 +72,7 @@
                 // evalua el status y devuelve true o false
                 return status == 0;
             },
-         checkStatus(status) {
+            checkStatus(status) {
                 // en function del valor del "status" en la base de datos se
                 // configura el color y el texto de la celda "status"
 

@@ -92,7 +92,7 @@ export default {
             inputGroup: 'input-group',
             hasErrors: JSON.parse(this.errors),
             returnScale: this.old_return_scale == '' ? 0 : this.old_return_scale,
-            oneWayFlight: this.old_flight_type == '' ? 1 : this.old_flight_type
+            oneWayFlight: this.old_flight_type == '' ? 0 : this.old_flight_type
         }
     },
     methods: {
@@ -105,6 +105,7 @@ export default {
         eventBus.$on('flightTypeChanged', (flight) => {
             this.oneWayFlight = flight;
         });
+        console.log("esto es console log" + this.oneWayFlight);
     }
 }
 </script>

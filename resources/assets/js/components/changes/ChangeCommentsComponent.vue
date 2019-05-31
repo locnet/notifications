@@ -6,8 +6,10 @@
         <form v-if="pnrData.status == 1"  class="form-horizontal">
             <div   class="col-md-12 col-xs-12">
                 <div class="input-group">
-                    <textarea  rows="6" cols="200" v-model="comments" class="form-control" name="comments"
-                                style="width:100%"></textarea>
+                    <textarea  rows="6" cols="200" v-model="comments" 
+                                class="form-control" name="comments"
+                                style="width:100%">
+                    </textarea>
                 </div>
             </div>
             <div class="col-md-3 col-xs-6">
