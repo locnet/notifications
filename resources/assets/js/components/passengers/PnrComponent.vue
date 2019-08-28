@@ -15,7 +15,7 @@
                     <td><strong>{{ departureStation }}:  </strong>{{ outbound_dep_time }}</td>
                     <td><strong>{{ arrivalStation }}: </strong>{{  outbound_arr_time }}</td>
                 </tr>
-                <tr>
+                <tr v-if="return_dep_time">
                     <td>VUELTA</td>
                     <td><strong>{{ arrivalStation }}: </strong>{{ return_dep_time }}</td>
                     <td><strong>{{ departureStation }}: </strong>{{  return_arr_time }}</td>

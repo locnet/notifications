@@ -50152,7 +50152,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pax: JSON.parse(this.passengers), // pasamos los pasageros a json
             liStyle: 'list-group-item', // estilo css
             selectedItem: 0, // utilizado para cambiar el background del item selecionado
-            nameFilter: '',
+            nameFilter: '', // lo utilizo para filtrar los pasageros
             namesArray: function namesArray() {
                 for (var p in pax) {
                     _this.push(p.passenger);
@@ -50178,7 +50178,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             return this.pax.filter(function (item) {
-
                 return item.passenger.match(_this2.nameFilter);
             });
         }
@@ -50469,19 +50468,23 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("tr", [
-                _c("td", [_vm._v("VUELTA")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("strong", [_vm._v(_vm._s(_vm.arrivalStation) + ": ")]),
-                  _vm._v(_vm._s(_vm.return_dep_time))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("strong", [_vm._v(_vm._s(_vm.departureStation) + ": ")]),
-                  _vm._v(_vm._s(_vm.return_arr_time))
-                ])
-              ])
+              _vm.return_dep_time
+                ? _c("tr", [
+                    _c("td", [_vm._v("VUELTA")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("strong", [_vm._v(_vm._s(_vm.arrivalStation) + ": ")]),
+                      _vm._v(_vm._s(_vm.return_dep_time))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("strong", [
+                        _vm._v(_vm._s(_vm.departureStation) + ": ")
+                      ]),
+                      _vm._v(_vm._s(_vm.return_arr_time))
+                    ])
+                  ])
+                : _vm._e()
             ])
           ]
         )

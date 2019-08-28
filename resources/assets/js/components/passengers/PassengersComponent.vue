@@ -49,7 +49,7 @@ export default {
             pax: JSON.parse(this.passengers),  // pasamos los pasageros a json
             liStyle: 'list-group-item',        // estilo css
             selectedItem: 0,                   // utilizado para cambiar el background del item selecionado
-            nameFilter: '',
+            nameFilter: '',                    // lo utilizo para filtrar los pasageros
             namesArray: () => {
                 for (var p in pax) {
                     this.push(p.passenger);
@@ -71,8 +71,7 @@ export default {
     },
     computed: {
     filteredItems() {
-        return this.pax.filter(item => {
-          
+        return this.pax.filter(item => {          
             return item.passenger.match(this.nameFilter);
         })
     }
