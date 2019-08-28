@@ -50139,6 +50139,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 // import bus event
 
@@ -50151,7 +50155,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             pax: JSON.parse(this.passengers), // pasamos los pasageros a json
             liStyle: 'list-group-item', // estilo css
-            selectedItem: 0, // utilizado para cambiar el background del item selecionado
+            selectedItem: 0, // utilizado para cambiar el background del item selecionado                 
             nameFilter: '', // lo utilizo para filtrar los pasageros
             namesArray: function namesArray() {
                 for (var p in pax) {
@@ -50245,7 +50249,8 @@ var render = function() {
                       key: index,
                       class: [
                         _vm.liStyle,
-                        { active: _vm.selectedItem == p.id }
+                        { active: _vm.selectedItem == p.id },
+                        { greyRow: p.id % 2 == 0 }
                       ],
                       staticStyle: { cursor: "pointer" },
                       on: {

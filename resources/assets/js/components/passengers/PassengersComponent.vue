@@ -26,7 +26,11 @@
                             <li v-for="(p,index) in filteredItems" :key="index"
                                 v-on:click="showPaxPnrs(p.id), selectedItem = p.id" 
                                 style="cursor:pointer"
-                                v-bind:class="[liStyle, {active: selectedItem == p.id}]">
+                                v-bind:class="[
+                                                liStyle,
+                                                {active: selectedItem == p.id},
+                                                {greyRow: (p.id%2 == 0)}
+                                            ]">
                                     {{ p.passenger }} / {{ p.phone}} / {{ p.pnr }}
                             </li>
                         </ul>
@@ -48,7 +52,7 @@ export default {
         return {
             pax: JSON.parse(this.passengers),  // pasamos los pasageros a json
             liStyle: 'list-group-item',        // estilo css
-            selectedItem: 0,                   // utilizado para cambiar el background del item selecionado
+            selectedItem: 0,                   // utilizado para cambiar el background del item selecionado                 
             nameFilter: '',                    // lo utilizo para filtrar los pasageros
             namesArray: () => {
                 for (var p in pax) {
