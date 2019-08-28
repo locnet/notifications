@@ -50137,6 +50137,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 // import bus event
 
@@ -50203,11 +50205,29 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.nameFilter,
+                expression: "nameFilter"
+              }
+            ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Filtra por nombre" },
-            domProps: { value: _vm.nameFilter }
+            domProps: { value: _vm.nameFilter },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.nameFilter = $event.target.value
+              }
+            }
           })
-        ])
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Se filtra por: " + _vm._s(_vm.nameFilter))])
       ]),
       _vm._v(" "),
       _c("table", { staticClass: "table table-striped table-bordered" }, [
@@ -50237,7 +50257,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            " +
+                        "\n                                " +
                           _vm._s(p.passenger) +
                           " / " +
                           _vm._s(p.phone) +

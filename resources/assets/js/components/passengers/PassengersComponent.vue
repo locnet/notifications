@@ -7,8 +7,10 @@
                 </div>
                 <input type="text" class="form-control"
                         placeholder="Filtra por nombre"
-                        v-bind:value="nameFilter">
+                        v-model="nameFilter">
+                
             </div>
+            <p>Se filtra por: {{ nameFilter }}</p>
         </div>
       
         <table class="table table-striped table-bordered">
@@ -25,7 +27,7 @@
                                 v-on:click="showPaxPnrs(p.id), selectedItem = p.id" 
                                 style="cursor:pointer"
                                 v-bind:class="[liStyle, {active: selectedItem == p.id}]">
-                                {{ p.passenger }} / {{ p.phone}} / {{ p.pnr }}
+                                    {{ p.passenger }} / {{ p.phone}} / {{ p.pnr }}
                             </li>
                         </ul>
                     </td>
@@ -69,10 +71,10 @@ export default {
     },
     computed: {
     filteredItems() {
-      return this.pax.filter(item => {
+        return this.pax.filter(item => {
           
-         return item.passenger.match(this.nameFilter);
-      })
+            return item.passenger.match(this.nameFilter);
+        })
     }
   }
 };
