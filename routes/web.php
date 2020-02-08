@@ -34,7 +34,13 @@ Route::get('pnr/create/{change_id}','PnrController@create');
 Route::post('pnr/store','PnrController@store');
 Route::get('pnr/close/{id}', 'PnrController@close');
 Route::get('pnr/details/{id}', 'PnrController@getPnrDetails');
+
+// pasageros
 Route::get('passenger', 'PnrController@index');
+Route::get('passenger/create', 'PassengerController@create');
+Route::post('passenger/store', 'PassengerController@store');
+Route::get('passenger/search', 'PassengerController@search');
+Route::post('passenger/show', 'PassengerController@show');
 
 
 Auth::routes();

@@ -35,6 +35,7 @@ Vue.component('app-form-outbound-direct-fly', require('./components/itineraries/
 Vue.component('app-form-outbound-scale-fly', require('./components/itineraries/OutboundScaleFly.vue'));
 Vue.component('app-form-return-direct-fly', require('./components/itineraries/ReturnDirectFly.vue'));
 Vue.component('app-form-return-scale-fly', require('./components/itineraries/ReturnScaleFly.vue'));
+Vue.component('app-create-passenger', require('./components/passengers/CreatePassenger.vue'));
 
 /**
  * componentes vista de cambios
@@ -51,6 +52,7 @@ Vue.component('app-change-comments-component', require('./components/changes/Cha
  */
 Vue.component('app-passengers-component', require('./components/passengers/PassengersComponent.vue'));
 Vue.component('app-pnr-component', require('./components/passengers/PnrComponent.vue'));
+Vue.component('app-search-component', require('./components/passengers/SearchComponent.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -7,8 +7,7 @@
                 </div>
                 <input type="text" class="form-control"
                         placeholder="Filtra por nombre"
-                        v-model="nameFilter">
-                
+                        v-model="nameFilter">                
             </div>
             <p>Se filtra por: {{ nameFilter }}</p>
         </div>
@@ -68,17 +67,17 @@ export default {
 
             // pedimos todos los pnr que tiene este pasagero 
             axios.get("pnr/details/" + id).then(response => {
-                // mandamos todo la respuesta por event bus al PnrComponent
+                // mandamos toda la respuesta por event bus al PnrComponent
                 eventBus.$emit("paxWasClicked", response.data);
             });
         }   
     },
     computed: {
-    filteredItems() {
-        return this.pax.filter(item => {          
-            return item.passenger.match(this.nameFilter);
-        })
+        filteredItems() {
+            return this.pax.filter(item => {          
+                return item.passenger.match(this.nameFilter);
+            })
+        }
     }
-  }
 };
 </script>

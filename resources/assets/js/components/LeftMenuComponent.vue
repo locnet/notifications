@@ -22,10 +22,30 @@
                     <ul class="dropdown-menu">
                         <li><a v-bind:href="itinerariesCreate">Nuevo</a></li>
                         <li><a v-bind:href="itinerariesAll">Todos</a></li>
+                        <li><a v-bind:href="passengerMain">
+                            <i class="fa fa-search"></i>Buscar</a>
+                        </li>
                     </ul>
                 </li>
-                <li role="presentation"><a v-bind:href="passengerMain"><i class="fa fa-user"></i>Pasageri</a></li>
-                <li role="presentacion"><a href=""><i class="fa fa-plane"></i>Itinerarios</a></li>
+                <li role="presentation">
+                    <a href="" class="dropdown-toggle" 
+					            	    data-toggle="dropdown">
+					            	    <span class="fa fa-user"></span>
+					            	    Contactos<span class="caret"></span>
+					            	</a>
+                    <ul class="dropdown-menu">
+                        <li><a v-bind:href="passengerMain">
+                            <i class="fa fa-user"></i>Listado contactos</a>
+                        </li>
+                        <li><a v-bind:href="passengerCreate">
+                            <i class="fa fa-plus-circle"></i>Nuevo contacto</a>
+                        </li>
+                        <li><a v-bind:href="passengerSearch">
+                            <i class="fa fa-search"></i>Buscar contacto</a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation"><a v-bind:href="passengerMain"><i class="fa fa-user"></i></a></li>
             </ul>
         </div>
     </div>
@@ -34,7 +54,8 @@
 
 <script>
     export default {
-        props: ['homeUrl','changesUrl','passengerMain', 'itinerariesCreate','itinerariesAll'],
+        props: ['homeUrl','changesUrl','passengerMain', 'passengerCreate', 'itinerariesCreate',
+        'itinerariesAll','passengerSearch'],
         data() {
             return {
                 

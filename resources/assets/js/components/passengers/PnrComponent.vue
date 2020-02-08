@@ -48,16 +48,17 @@ export default {
             var d = {};
             // solicitamos los detalles del localizador 
             axios.get('pnr/details/' + id)
-            .then( response => {
-                d = response.data;
-            })
+                .then( response => {
+                    d = response.data;
+                })
         }
     },
     created() {
         eventBus.$on('paxWasClicked', (data) => {
             // enseño la tabla de los detalles
             this.showDetails = true;
-            // la propiedad "data" es un objeto que contiene otros objetos que son los localizadores (pnr)
+            // la propiedad "data" es un objeto que contiene otros objetos que 
+            // son los localizadores (pnr)
             // que pertenecen a un usuario en particular
             console.log(data);
             this.departureStation = data.departure_station;

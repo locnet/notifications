@@ -85,7 +85,9 @@
                         itineraries-create = "{{ url('itineraries/create') }}"
                         itineraries-copy = "{{ url('itineraries/copy') }}"
                         itineraries-all = "{{ url('itineraries') }}"
-                        passenger-main = "{{ url('passenger') }}">
+                        passenger-main = "{{ url('passenger') }}"
+                        passenger-create = "{{ url('passenger/create') }}"
+                        passenger-search = "{{ url('passenger/search') }}">
                     </app-left-menu-component>
                 </div>
                 @yield('content')

@@ -118,7 +118,7 @@
                                             format: dateFormat
                                         }
                                     );
-            // habilito el picker de la fecha del llegada (por defecto esta desabilitado
+            // habilito el picker de la fecha de llegada (por defecto esta desabilitado
             // hasta que se elige una fecha de salida)
             $('#outbound_arr_date').removeAttr('disabled','disabled');
 

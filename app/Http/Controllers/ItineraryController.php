@@ -48,9 +48,9 @@ class ItineraryController extends Controller
 
     public function create() {
         // array pasageros
-        $passenger_array = $this->passenger->pluck('name','id')->sort();
+        //$passenger_array = $this->passenger->pluck('name','id')->sort();
         
-        return view('itineraries.create',compact('passenger_array'));
+        return view('itineraries.create');
     }
     
 
