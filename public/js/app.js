@@ -543,7 +543,7 @@ Vue.component('app-change-comments-component', __webpack_require__(90));
  */
 Vue.component('app-passengers-component', __webpack_require__(93));
 Vue.component('app-pnr-component', __webpack_require__(96));
-Vue.component('app-search-component', __webpack_require__(108));
+Vue.component('app-search-component', __webpack_require__(99));
 
 var app = new Vue({
   el: '#app',
@@ -1188,7 +1188,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(99);
+module.exports = __webpack_require__(102);
 
 
 /***/ }),
@@ -46252,6 +46252,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -46263,7 +46265,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             jsonChanges: JSON.parse(this.changes),
             pnrsData: JSON.parse(this.pnrs),
             viewDetails: true,
-            viewFilter: 'all'
+            viewFilter: 'pending'
         };
     },
 
@@ -46287,7 +46289,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
                 return false;
             } else {
-                // se muestran la notificaiones cerradas
+                // se muestran la notificaciones cerradas
                 this.viewFilter = 'closed';
                 if (this.viewFilter == 'closed' && status == 0) {
                     return true;
@@ -46324,20 +46326,6 @@ var render = function() {
         _c(
           "li",
           {
-            class: { active: _vm.viewFilter == "all" },
-            attrs: { role: "presentation" },
-            on: {
-              click: function($event) {
-                _vm.setFilter("all")
-              }
-            }
-          },
-          [_c("a", { attrs: { href: "#" } }, [_vm._v("Todos")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
             class: { active: _vm.viewFilter == "pending" },
             attrs: { role: "presentation" },
             on: {
@@ -46347,6 +46335,20 @@ var render = function() {
             }
           },
           [_c("a", { attrs: { href: "#" } }, [_vm._v("Pendientes")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            class: { active: _vm.viewFilter == "all" },
+            attrs: { role: "presentation" },
+            on: {
+              click: function($event) {
+                _vm.setFilter("all")
+              }
+            }
+          },
+          [_c("a", { attrs: { href: "#" } }, [_vm._v("Todos")])]
         ),
         _vm._v(" "),
         _c(
@@ -50982,28 +50984,14 @@ if (false) {
 
 /***/ }),
 /* 99 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(109)
+var __vue_script__ = __webpack_require__(100)
 /* template */
-var __vue_template__ = __webpack_require__(110)
+var __vue_template__ = __webpack_require__(101)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51042,7 +51030,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 109 */
+/* 100 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51124,7 +51112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 110 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51275,6 +51263,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-b10ade14", module.exports)
   }
 }
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

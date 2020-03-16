@@ -7,14 +7,16 @@
 
         <div class="panel-body">
             <ul class="nav nav-tabs">
+                <li role="presentation" v-bind:class="{active: viewFilter == 'pending'}" 
+                                        @click="setFilter('pending')">
+                    <a href="#">Pendientes</a>
+                </li>
+                
                 <li role="presentation" v-bind:class="{active: viewFilter == 'all'}"
                                         @click="setFilter('all')">
                     <a href="#">Todos</a>
                 </li>
-                <li role="presentation" v-bind:class="{active: viewFilter == 'pending'}" 
-                                        @click="setFilter('pending')">
-                    <a href="#">Pendientes</a>
-                    </li>
+                
                 <li role="presentation"  v-bind:class="{active: viewFilter == 'closed'}"
                                         @click="setFilter('closed')">
                     <a href="#">Cerrados</a>
@@ -63,8 +65,8 @@
                 jsonData: JSON.parse(this.itinerary),
                 jsonChanges: JSON.parse(this.changes),
                 pnrsData: JSON.parse(this.pnrs),
-                viewDetails:true,                
-                viewFilter: 'all'
+                viewDetails: true,                
+                viewFilter: 'pending'
             }
         },
         methods: {
@@ -87,7 +89,7 @@
                     }
                     return false;
                 } else {                
-                    // se muestran la notificaiones cerradas
+                    // se muestran la notificaciones cerradas
                     this.viewFilter = 'closed';
                     if (this.viewFilter == 'closed' && status == 0) {
                         return true;
