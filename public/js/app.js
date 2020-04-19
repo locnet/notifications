@@ -34649,7 +34649,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get('change/' + this.pnr).then(function (response) {
-                _this.arrayData = response.data;console.log(_this.arrayData);
+                _this.arrayData = response.data;console.log("arrayData: " + _this.arrayData);
             }).then(function (data) {
                 var resultArray = [];
                 for (var key in data) {
@@ -50634,6 +50634,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("pnr/details/" + id).then(function (response) {
                 // mandamos toda la respuesta por event bus al PnrComponent
                 __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
+                // necesito el id del pnr para sacar los detalles
+                __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("pnrId", id);
             });
         }
     },
@@ -50851,12 +50853,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // event bus
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['baseUrl'],
     data: function data() {
         return {
             departureStation: '',
@@ -50865,13 +50877,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             outbound_arr_time: '',
             return_dep_time: '',
             return_arr_time: '',
-            showDetails: false
+            showDetails: false,
+            pnrId: ''
         };
     },
 
     methods: {
         showPnrDetails: function showPnrDetails(id) {
-            console.log("id: " + id);
+
+            console.log("id: " + this.pnrId);
+
+            // el boton de los detalles necesita el id del itinerario para ver los detalles
+            // del itinerario 
+            this.pnrId = id;
+
             var d = {};
             // solicitamos los detalles del localizador 
             axios.get('pnr/details/' + id).then(function (response) {
@@ -50885,6 +50904,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('paxWasClicked', function (data) {
             // enseño la tabla de los detalles
             _this.showDetails = true;
+
             // la propiedad "data" es un objeto que contiene otros objetos que 
             // son los localizadores (pnr)
             // que pertenecen a un usuario en particular
@@ -50897,6 +50917,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.outbound_arr_time = data.outbound_arr_time;
             _this.return_dep_time = data.return_dep_time;
             _this.return_arr_time = data.return_arr_time;
+        });
+
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('pnrId', function (data) {
+            _this.pnrId = data;
         });
     }
 });
@@ -50953,7 +50977,15 @@ var render = function() {
                 : _vm._e()
             ])
           ]
-        )
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("a", { attrs: { href: _vm.baseUrl + "/" + _vm.pnrId } }, [
+              _vm._m(1)
+            ])
+          ])
+        ])
       ])
     : _vm._e()
 }
@@ -50971,6 +51003,19 @@ var staticRenderFns = [
         _c("th", { staticStyle: { width: "40%" } }, [_vm._v("Llegada")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+      [
+        _c("i", { staticClass: "fa fa-btn fa-database" }),
+        _vm._v("Ver detalles\n                ")
+      ]
+    )
   }
 ]
 render._withStripped = true

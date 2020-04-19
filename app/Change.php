@@ -31,7 +31,7 @@ class Change extends Model
     }
 
     /**
-     * Devuelve una coleccion de cambios junto con los pnr afectados
+     * Devuelve una coleccion de la tabla cambios junto con la tabla de los pnr afectados
      *
      * @return 
      */

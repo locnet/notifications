@@ -26,7 +26,7 @@
             fetchData() {
                 axios.get('change/'  + this.pnr)
                     .then( response => {
-                        this.arrayData = response.data; console.log(this.arrayData);
+                        this.arrayData = response.data; console.log("arrayData: "+ this.arrayData);
                         
                     })
                     .then( data => {

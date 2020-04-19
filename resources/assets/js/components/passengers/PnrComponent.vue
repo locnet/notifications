@@ -22,6 +22,15 @@
                 </tr>
             </tbody>
         </table>
+        <div class="col-12">
+            <div class="form-group">
+                <a v-bind:href=" baseUrl + '/' + pnrId">                                                                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-database"></i>Ver detalles
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -31,6 +40,7 @@
 import { eventBus } from '../../app.js';
 
 export default {
+    props:  ['baseUrl'],
     data() {
         return {
             departureStation:'',
@@ -39,12 +49,19 @@ export default {
             outbound_arr_time:'',
             return_dep_time: '',
             return_arr_time:'',
-            showDetails: false
+            showDetails: false,
+            pnrId: ''
         }
     },
     methods: {
-        showPnrDetails(id) {
-            console.log("id: " + id);
+        showPnrDetails(id) {            
+            
+            console.log("id: " + this.pnrId);
+
+            // el boton de los detalles necesita el id del itinerario para ver los detalles
+            // del itinerario 
+            this.pnrId = id;
+
             var d = {};
             // solicitamos los detalles del localizador 
             axios.get('pnr/details/' + id)
@@ -56,7 +73,8 @@ export default {
     created() {
         eventBus.$on('paxWasClicked', (data) => {
             // enseño la tabla de los detalles
-            this.showDetails = true;
+            this.showDetails = true;            
+
             // la propiedad "data" es un objeto que contiene otros objetos que 
             // son los localizadores (pnr)
             // que pertenecen a un usuario en particular
@@ -69,6 +87,10 @@ export default {
             this.outbound_arr_time = data.outbound_arr_time;
             this.return_dep_time = data.return_dep_time;
             this.return_arr_time = data.return_arr_time;           
+        });
+
+        eventBus.$on('pnrId', (data) => {
+            this.pnrId = data;
         });
     }
 }

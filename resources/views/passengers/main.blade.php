@@ -6,5 +6,8 @@
          
      </app-passengers-component>
 
-     <app-pnr-component></app-pnr-component>
+     <app-pnr-component 
+     		base-url = "{{ url('itineraries') }}">
+     			
+	</app-pnr-component>
 @endsection
