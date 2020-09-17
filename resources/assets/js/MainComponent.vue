@@ -53,7 +53,7 @@
                                 {{ pnr.status == 0 ? 'Cerrado' : 'Pendiente' }}
                             </td>
 
-                            <td><a v-bind:href="baseUrl + '/' + pnr.pnr.id"
+                            <td><a v-bind:href="baseUrl + '/' + pnr.id"
                                         @click="viewDetails = !viewDetails"
                                         style="cursor:pointer">Detalles</a>
                             </td>

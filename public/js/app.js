@@ -46437,7 +46437,7 @@ var render = function() {
                         "a",
                         {
                           staticStyle: { cursor: "pointer" },
-                          attrs: { href: _vm.baseUrl + "/" + pnr.pnr.id },
+                          attrs: { href: _vm.baseUrl + "/" + pnr.id },
                           on: {
                             click: function($event) {
                               _vm.viewDetails = !_vm.viewDetails
