@@ -29,23 +29,34 @@
                         <tr class="text-center">
                             <th>PASAGERO</th>
                             <th>LOCALIZADOR</th>
-                            <th class="hidden-xs">DETALLES</th>
+                            <th>AEROLINEA</th>
+                            <th>FECHA</th>
+                            <th>TLF</th>
                             <th>STATUS</th>
                             <th>DETALLES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(pnr,index) in pnrsData" v-show="checkStatus(pnr.status)" :key="index">
+                        <tr v-for="(pnr,index) in jsonChanges" v-show="checkStatus(pnr.status)" :key="index">
                             <td>{{ pnr.passenger }}</td>
+
                             <td>{{ pnr.pnr.toUpperCase() }}</td>
-                            <td class="hidden-xs">{{ pnr.comments.substring(0,80) }}</td>
+
+                            <td>{{ pnr.carrier }}</td>
+
+                            <td>{{ pnr.outbound_dep_time }}</td>
+
+                            <td>{{ pnr.phone }} </td>
+
                             <td v-bind:class="{ pending: !isActive(pnr.status),
                                                 closed: isActive(pnr.status) } ">
                                 {{ pnr.status == 0 ? 'Cerrado' : 'Pendiente' }}
                             </td>
-                            <td><a v-bind:href="baseUrl + '/' + pnr.id"
+
+                            <td><a v-bind:href="baseUrl + '/' + pnr.pnr.id"
                                         @click="viewDetails = !viewDetails"
-                                        style="cursor:pointer">Detalles</a></td>
+                                        style="cursor:pointer">Detalles</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -65,6 +76,7 @@
                 jsonData: JSON.parse(this.itinerary),
                 jsonChanges: JSON.parse(this.changes),
                 pnrsData: JSON.parse(this.pnrs),
+                parsedItinerary: JSON.parse(this.itinerary),
                 viewDetails: true,                
                 viewFilter: 'pending'
             }

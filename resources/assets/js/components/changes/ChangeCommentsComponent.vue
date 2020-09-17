@@ -19,17 +19,27 @@
                 <p>Status : {{ status }}</p>
             </div>
         </form>
-             <div class="col-md-3 col-xs-6">
-                <a v-bind:href="close_notification_url"
-                    v-if="pnrData.status == 1">
-                    <button class="btn btn-warning">Cerrar notificacion</button></a>
+         <div class="col-md-3 col-xs-6">
+            <a v-bind:href="close_notification_url"
+                v-if="pnrData.status == 1">
+                <button class="btn btn-warning">Cerrar notificacion</button></a>
+        </div>
+
+         <div class="col-md-12 col-xs-12">
+            <div class="col-md-3 col-xs-6">
+                <a v-bind:href="open_notification_url"
+                    v-if="pnrData.status == 0">
+                    <button class="btn btn-primary">Reabrir caso</button></a>
             </div>
+        </div>
+        
     </div>
+
 </template>
 
 <script>
     export default {
-        props: ['pnr','old_comments','close_notification_url'],
+        props: ['pnr','old_comments','close_notification_url','open_notification_url'],
         data() {
             return {
                 pnrData: JSON.parse(this.pnr),          // el pnr

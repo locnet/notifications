@@ -38,8 +38,9 @@ class Change extends Model
     public function getChangesWithPnrs() {
         return DB::table('changes')
                 ->join('pnrs', 'pnrs.change_id','=','changes.id')
-                ->select('changes.id','changes.outbound_dep_time','changes.itinerary_id',
-                        'pnrs.pnr','pnrs.passenger')
+                ->join('itineraries', 'changes.itinerary_id', '=', 'itineraries.id' )
+                ->select('changes.id','changes.outbound_dep_time','changes.itinerary_id','pnrs.id',
+                        'pnrs.pnr','pnrs.passenger','pnrs.phone','pnrs.status', 'itineraries.carrier')
                 ->get();
     }
 }

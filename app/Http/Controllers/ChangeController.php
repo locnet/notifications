@@ -24,15 +24,18 @@ class ChangeController extends Controller
         $this->pnr = $pnr;
     }
 
+
     /**
      * devuelve la pagina principal de los cambios
      *
      * @return \Illuminate\Http\Response     
      * 
      */
+
     public function index() {
         return $this->change->find(1)->first();
     }
+
 
     /**
      * formulario para crear una nueva entrada
@@ -40,6 +43,7 @@ class ChangeController extends Controller
      * @param int $itinerary_id
      * @return \Illuminate\Http\Response
      */
+
     public function create($itinerary_id) {
 
         $itinerary = $this->itinerary->find($itinerary_id);
@@ -47,12 +51,14 @@ class ChangeController extends Controller
         return view('changes.create', compact('itinerary'));;
     }
 
+
     /**
      * registrar el cambio en la base de datos
      *
      * @param Request $request
      * @return App\Change
      */
+
     public function store(Request $request) {
         // validamos el formulario
         $validatedData = $this->validate($request,[
@@ -139,12 +145,15 @@ class ChangeController extends Controller
             return view('error')->withMessage("No se ha podido insertar el itinerario en la base de datos");
         }
     }
+
+
     /**
      * devuelve el cambio que afecta un vuelo
      *
      * @param [type] $pnr
      * @return \Illuminate\Http\Response
      */
+    
     public function getChangeByPnr($pnr) {
         return $this->pnr::where('pnr',$pnr)->first()->change;
     }

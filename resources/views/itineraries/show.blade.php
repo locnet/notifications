@@ -31,7 +31,8 @@
         <app-change-comments-component
                     pnr="{{  $pnr }}"
                     old_comments ="{{ $old_comments }}"
-                    close_notification_url="{{ url('pnr/close/'.$pnr->id) }}">
+                    close_notification_url="{{ url('pnr/close/'.$pnr->id) }}"
+                    open_notification_url="{{ url('pnr/open/'.$pnr->id) }}">
         </app-change-comments-component>
 
                            

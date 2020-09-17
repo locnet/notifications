@@ -28,17 +28,20 @@ class ItineraryController extends Controller
         $this->pnr = $pnr;
     }
 
+
     /**
      * Devuelve todos los itinerarios.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $itineraries = $this->itinerary::all();
         
         return view('itineraries.index',compact('itineraries'));
     }
+
 
     /**
      * Eseña el formulario para crear un nuevo itinerario
@@ -161,6 +164,7 @@ class ItineraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id) {
         $pnr = $this->pnr->find($id);
         $old_comments = $pnr->comments. "&";
@@ -174,16 +178,20 @@ class ItineraryController extends Controller
         return view('itineraries.show',compact('pnr','change','itinerary','old_comments'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
         //
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -192,10 +200,13 @@ class ItineraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         //
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -203,6 +214,7 @@ class ItineraryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy($id)
     {
         //

@@ -46254,6 +46254,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46264,6 +46275,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             jsonData: JSON.parse(this.itinerary),
             jsonChanges: JSON.parse(this.changes),
             pnrsData: JSON.parse(this.pnrs),
+            parsedItinerary: JSON.parse(this.itinerary),
             viewDetails: true,
             viewFilter: 'pending'
         };
@@ -46378,7 +46390,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.pnrsData, function(pnr, index) {
+              _vm._l(_vm.jsonChanges, function(pnr, index) {
                 return _c(
                   "tr",
                   {
@@ -46397,9 +46409,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(pnr.pnr.toUpperCase()))]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "hidden-xs" }, [
-                      _vm._v(_vm._s(pnr.comments.substring(0, 80)))
-                    ]),
+                    _c("td", [_vm._v(_vm._s(pnr.carrier))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(pnr.outbound_dep_time))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(pnr.phone) + " ")]),
                     _vm._v(" "),
                     _c(
                       "td",
@@ -46423,7 +46437,7 @@ var render = function() {
                         "a",
                         {
                           staticStyle: { cursor: "pointer" },
-                          attrs: { href: _vm.baseUrl + "/" + pnr.id },
+                          attrs: { href: _vm.baseUrl + "/" + pnr.pnr.id },
                           on: {
                             click: function($event) {
                               _vm.viewDetails = !_vm.viewDetails
@@ -46462,7 +46476,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("LOCALIZADOR")]),
         _vm._v(" "),
-        _c("th", { staticClass: "hidden-xs" }, [_vm._v("DETALLES")]),
+        _c("th", [_vm._v("AEROLINEA")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("FECHA")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("TLF")]),
         _vm._v(" "),
         _c("th", [_vm._v("STATUS")]),
         _vm._v(" "),
@@ -50337,9 +50355,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['pnr', 'old_comments', 'close_notification_url'],
+    props: ['pnr', 'old_comments', 'close_notification_url', 'open_notification_url'],
     data: function data() {
         return {
             pnrData: JSON.parse(this.pnr), // el pnr
@@ -50491,6 +50519,18 @@ var render = function() {
               ])
             ])
           : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 col-xs-12" }, [
+        _c("div", { staticClass: "col-md-3 col-xs-6" }, [
+          _vm.pnrData.status == 0
+            ? _c("a", { attrs: { href: _vm.open_notification_url } }, [
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _vm._v("Reabrir caso")
+                ])
+              ])
+            : _vm._e()
+        ])
       ])
     ],
     2
@@ -50634,9 +50674,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get("pnr/details/" + id).then(function (response) {
                 // mandamos toda la respuesta por event bus al PnrComponent
                 __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("paxWasClicked", response.data);
-                // necesito el id del pnr para sacar los detalles
-                __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("pnrId", id);
             });
+
+            // necesito el id del pnr, lo utilizo en el boton en PnrComponent.vue
+            __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$emit("pnrId", id);
         }
     },
     computed: {
@@ -50919,6 +50960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.return_arr_time = data.return_arr_time;
         });
 
+        // el id del pnr, viene de PassangersComponent.vue
         __WEBPACK_IMPORTED_MODULE_0__app_js__["eventBus"].$on('pnrId', function (data) {
             _this.pnrId = data;
         });

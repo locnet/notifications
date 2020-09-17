@@ -89,6 +89,7 @@ export default {
             this.return_arr_time = data.return_arr_time;           
         });
 
+        // el id del pnr, viene de PassangersComponent.vue
         eventBus.$on('pnrId', (data) => {
             this.pnrId = data;
         });

@@ -28,14 +28,16 @@ class PnrController extends Controller
         return view('passengers.main',compact('passenger'));
     }
 
+
     /**
      * Formulario para crear una nueva entrada en Pnr
      *
      * @param int $change_id
      * @return \Illumintate\Http\Response
      */
+
     public function create ($change_id) {
-        $change = $this->change::find($change_id);
+        $change = $this->change::findOrFail($change_id);
         if ($change) {
             return view('pnrs.create_pnr',compact('change'));
         } else {
@@ -44,12 +46,14 @@ class PnrController extends Controller
         
     }
 
+
     /**
      * crea un nuevo pnr en la base de datos
      *
      * @param Request $request
      * @return void
      */
+
     public function store(Request $request) {
         $this->validate($request,[
             'change_id' => 'required|numeric',
@@ -81,11 +85,13 @@ class PnrController extends Controller
         }
     }
 
+
     /**
     * actualiza entrada "comments" en tabla pnrs
     * @param $request
     * @return boolean true
     */
+
     public function updateComments(Request $request) {
 
         $id = $request->id;
@@ -98,7 +104,7 @@ class PnrController extends Controller
         // transfomamos el array en un string
         $imploded = implode(';' , $comment);
 
-        $p = $this->pnr->find($id);
+        $p = $this->pnr->findOrFail($id);
 
         // comentarios antiguos
         if ( strlen($request->comment) > 0) {
@@ -117,29 +123,48 @@ class PnrController extends Controller
         return "false";   
     }
 
+
     /**
      * cambia el estatus de este localizador
      *
      * @param int $id
      * @return void
      */
+
     public function close($id) {
-        $p = $this->pnr->find($id);
+        $p = $this->pnr->findOrFail($id);
         $p->status = 0;
 
         $p->update();
         return redirect('home');
     }
 
+    /** 
+    * cambia el estado del pnr de cerrado a abierto, 
+    * volvera a aparecer en la primera pagina como "pendiente"
+    * @param string $pnr
+    * @return object $change
+    */
+
+    public function open($id) {
+        
+        $p = $this->pnr->findOrFail($id);
+        $p->status = 1;
+
+        $p->update();
+        return redirect('home');
+    }
+
     /**
-     * devuelve los detalles de un localizador, mezclados con los del cambio
+     * devuelve los cambios que pertenecen a un pnr
      *
      * @param string $pnr
-     * @return object
+     * @return object $change
      */
     public function getPnrDetails($id) {
         $p = $this->pnr->where('id',$id)->first();
 
         return $this->change->find($p->change_id);
     }
+
 }

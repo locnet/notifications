@@ -69,9 +69,11 @@ export default {
             axios.get("pnr/details/" + id).then(response => {
                 // mandamos toda la respuesta por event bus al PnrComponent
                 eventBus.$emit("paxWasClicked", response.data);
-                // necesito el id del pnr para sacar los detalles
-                eventBus.$emit("pnrId", id);
+
             });
+
+            // necesito el id del pnr, lo utilizo en el boton en PnrComponent.vue
+            eventBus.$emit("pnrId", id);
         }   
     },
     computed: {
